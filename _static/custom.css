@@ -1,0 +1,223 @@
+:root {
+  --custom-color: #cbb992;
+
+  /* Primary Colors */
+  --purdue-boilermaker-gold: #cfb991;
+  --purdue-black: #000000;
+
+  /* Supporting Colors */
+  --purdue-aged: #8e6f3e;
+  --purdue-rush: #daaa00;
+  --purdue-field: #ddb945;
+  --purdue-dust: #ebd99f;
+
+  --purdue-steel: #555960;
+  --purdue-cool-gray: #6f727b;
+  --purdue-railway-gray: #9d9795;
+  --purdue-steam: #c4bfc0;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Text Alignment                                                             */
+/* -------------------------------------------------------------------------- */
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Theme Colors                                                               */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme="dark"] {
+  --pst-color-primary: var(--purdue-steam);
+  --sample-output-bg-color: var(--lt-color-gray-700);
+  --test-case-table-rule-color: var(--lt-color-gray-700);
+  --deliverables-table-bg-color: var(--purdue-aged);
+  --table-header-bg-color: var(--purdue-black);
+  --table-header-text-color: var(--purdue-boilermaker-gold);
+  --table-stripe-bg-color: rgba(255, 255, 255, 0.04);
+}
+
+html[data-theme="light"] {
+  --pst-color-primary: var(--purdue-black);
+  --sample-output-bg-color: var(--lt-color-gray-200);
+  --test-case-table-rule-color: var(--lt-color-gray-900);
+  --deliverables-table-bg-color: var(--purdue-dust);
+  --table-header-bg-color: var(--purdue-dust);
+  --table-header-text-color: var(--purdue-black);
+  --table-stripe-bg-color: rgba(0, 0, 0, 0.04);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Headings and Text                                                          */
+/* -------------------------------------------------------------------------- */
+
+.bd-article h1 {
+  font-weight: 700;
+}
+
+.bd-article h2 {
+  font-weight: 700;
+}
+
+.bd-article h3 {
+  font-weight: 600;
+}
+
+.bd-article h4,
+.bd-article h5,
+.bd-article h6 {
+  font-weight: 600;
+}
+
+/* Softer emphasis within normal body text */
+.bd-article p strong,
+.bd-article li strong {
+  font-weight: 550;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Sample Output                                                              */
+/* -------------------------------------------------------------------------- */
+
+.admonition.sample-output,
+div.admonition.sample-output {
+  font-family: monospace;
+  border-color: var(--pst-color-attention);
+  background-color: var(--sample-output-bg-color);
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 30rem;
+  display: grid;
+  white-space: pre;
+}
+
+.admonition.sample-output > .admonition-title::before,
+div.admonition.sample-output > .admonition-title::before {
+  background-color: var(--pst-color-attention-bg);
+}
+
+.admonition.sample-output > .admonition-title::after,
+div.admonition.sample-output > .admonition-title::after {
+  color: var(--pst-color-attention);
+  content: ""; /* Font Awesome icon for "code-compare" */
+}
+
+div.output-file {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 30rem;
+  display: grid;
+}
+
+img.sample-output {
+  border-radius: 0.25rem;
+  box-shadow:
+    0 0.2rem 0.5rem var(--pst-color-shadow),
+    0 0 0.0625rem var(--pst-color-shadow) !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Tables                                                                     */
+/* -------------------------------------------------------------------------- */
+
+/* General table header rule */
+.table thead tr,
+table thead tr {
+  border-bottom: 1px solid var(--test-case-table-rule-color);
+}
+
+/* Body cells do not use individual horizontal borders */
+table td {
+  border-bottom: none;
+}
+
+/* Light alternating row banding */
+.bd-article table tbody tr:nth-child(odd),
+.bd-article table tbody tr:nth-child(odd):hover {
+  background-color: transparent;
+}
+
+.bd-article table tbody tr:nth-child(even),
+.bd-article table tbody tr:nth-child(even):hover {
+  background-color: var(--table-stripe-bg-color);
+}
+
+/* Prevent theme hover styling from changing individual cells */
+.bd-article table tbody tr:hover td,
+.bd-article table tbody tr:hover th {
+  background-color: transparent !important;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Test Case Tables                                                           */
+/* -------------------------------------------------------------------------- */
+
+table.table.test-case-table {
+  border-block: 2px solid var(--test-case-table-rule-color);
+}
+
+table.table.test-case-table thead tr {
+  background-color: var(--table-header-bg-color);
+  color: var(--table-header-text-color);
+  border-bottom: 1px solid var(--test-case-table-rule-color);
+}
+
+table.table.test-case-table thead th {
+  color: var(--table-header-text-color);
+  font-weight: 700;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Deliverables Tables                                                        */
+/* -------------------------------------------------------------------------- */
+
+table.table.deliverables > thead > tr {
+  background-color: var(--deliverables-table-bg-color);
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* User Input                                                                 */
+/* -------------------------------------------------------------------------- */
+
+.user-input {
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Ordered Lists                                                              */
+/* -------------------------------------------------------------------------- */
+
+/* Use lowercase letters for second-level ordered lists */
+ol.arabic ol.arabic {
+  list-style: lower-alpha;
+}
+
+/* Use Roman numerals for third-level ordered lists */
+ol.arabic ol ol.arabic {
+  list-style: lower-roman;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/* Images                                                                     */
+/* -------------------------------------------------------------------------- */
+
+.no-smoothing {
+  image-rendering: pixelated;
+}

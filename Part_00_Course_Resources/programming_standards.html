@@ -1,0 +1,1032 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MATLAB Programming Standards in ENGR 132 &#8212; Purdue University ENGR 13200</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=7ca7f3bf" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Part_00_Course_Resources/programming_standards';</script>
+    <link rel="icon" href="../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Glue Factory" href="../glue_factory.html" />
+    <link rel="prev" title="Course Software" href="course_software.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Purdue University ENGR 13200 - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Purdue University ENGR 13200 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Transforming Ideas to Innovation
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Welcome to ENGR 132</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="course_schedule.html">Course Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help_sessions.html">Help Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="course_software.html">Course Software</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Programming Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glue_factory.html">Glue Factory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering Skills and Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_01_ENGR_Skills/M1_Orientation/0_overview.html">1. Course Orientation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Part_01_ENGR_Skills/M1_Orientation/tasks/ind_1/instructions.html">1.1. Course Policies Exploration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_01_ENGR_Skills/M2_AI/0_overview.html">2. Artificial Intelligence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Part_01_ENGR_Skills/M2_AI/tasks/ind_1/instructions.html">2.1. AI: AI Assignment 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Part_01_ENGR_Skills/M2_AI/tasks/ind_2/instructions.html">2.2. AI: AI Assignment 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Part_01_ENGR_Skills/M2_AI/tasks/ind_3/instructions.html">2.3. AI: AI Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../Part_01_ENGR_Skills/M3_Teaming/0_overview.html">3. CATME Teaming</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MATLAB Skills</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/0_overview.html">4. MATLAB Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/1_preclass_overview.html">4.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/1.1_materials.html">4.1.1. PCMs: MATLAB Foundations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/tasks/pre_1/instructions.html">4.1.2. PCA: Engineering Calculations in MATLAB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/tasks/pre_2/instructions.html">4.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/2_inclass_overview.html">4.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/tasks/ica_1/instructions.html">4.2.1. ICA: MATLAB Onramp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/tasks/ica_2/instructions.html">4.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/3_assignment_overview.html">4.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M1/tasks/ind_1/instructions.html">4.3.1. MA: MATLAB Foundations</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/0_overview.html">5. Data Manipulation and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/1_preclass_overview.html">5.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/1.1_materials.html">5.1.1. PCMs: Data Manipulation and Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/tasks/pre_1/instructions.html">5.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/tasks/pre_2/instructions.html">5.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/2_inclass_overview.html">5.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/tasks/ica_1/instructions.html">5.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/tasks/ica_2/instructions.html">5.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/3_assignment_overview.html">5.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M2/tasks/ind_1/instructions.html">5.3.1. MA: Data Manipulation and Visualization</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/0_overview.html">6. Logic and Modularity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/1_preclass_overview.html">6.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/1.1_materials.html">6.1.1. PCMs: Logic and Modularity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/tasks/pre_1/instructions.html">6.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/tasks/pre_2/instructions.html">6.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/2_inclass_overview.html">6.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/tasks/ica_1/instructions.html">6.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/tasks/ica_2/instructions.html">6.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/3_assignment_overview.html">6.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M3/tasks/ind_1/instructions.html">6.3.1. MA: Logic and Modularity</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/0_overview.html">7. Looping Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/1_preclass_overview.html">7.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/1.1_materials.html">7.1.1. PCMs: Looping Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/tasks/pre_1/instructions.html">7.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/tasks/pre_2/instructions.html">7.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/2_inclass_overview.html">7.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/tasks/ica_1/instructions.html">7.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/tasks/ica_2/instructions.html">7.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/3_assignment_overview.html">7.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M4/tasks/ind_1/instructions.html">7.3.1. MA: Looping Structures</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/0_overview.html">8. Regression and Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/1_preclass_overview.html">8.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/1.1_materials.html">8.1.1. PCMs: Regression and Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/tasks/pre_1/instructions.html">8.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/tasks/pre_2/instructions.html">8.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/2_inclass_overview.html">8.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/tasks/ica_1/instructions.html">8.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/tasks/ica_2/instructions.html">8.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/3_assignment_overview.html">8.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_02_MATLAB_Skills/M5/tasks/ind_1/instructions.html">8.3.1. MA: Regression and Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Team Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Part_03_Team_Project/0_overview.html">9. Team Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_03_Team_Project/milestone_1/0_overview.html">9.1. Milestone 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_1/tasks/ind_1/instructions.html">9.1.1. M1: Milestone 1 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_1/tasks/team_1/instructions.html">9.1.2. M1: Milestone 1 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_03_Team_Project/milestone_2/0_overview.html">9.2. Milestone 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_2/tasks/ind_1/instructions.html">9.2.1. M2: Milestone 2 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_2/tasks/team_1/instructions.html">9.2.2. M2: Milestone 2 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_03_Team_Project/milestone_3/0_overview.html">9.3. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_3/tasks/ind_1/instructions.html">9.3.1. M3: Milestone 3 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_3/tasks/team_1/instructions.html">9.3.2. M3: Milestone 3 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_03_Team_Project/milestone_4/0_overview.html">9.4. Milestone 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_4/tasks/ind_1/instructions.html">9.4.1. M4: Milestone 4 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_4/tasks/team_1/instructions.html">9.4.2. M4: Milestone 4 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_03_Team_Project/milestone_5/0_overview.html">9.5. Milestone 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_5/tasks/ind_1/instructions.html">9.5.1. M5: Milestone 5 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_5/tasks/team_1/instructions.html">9.5.2. M5: Milestone 5 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_03_Team_Project/milestone_6/0_overview.html">9.6. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_6/tasks/ind_1/instructions.html">9.6.1. M6: Milestone 6 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_6/tasks/team_1/instructions.html">9.6.2. M6: Milestone 6 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Part_03_Team_Project/milestone_7/0_overview.html">9.7. Milestone 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_7/tasks/ind_1/instructions.html">9.7.1. M7: Milestone 7 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Part_03_Team_Project/milestone_7/tasks/team_1/instructions.html">9.7.2. M7: Milestone 7 - Team</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Individual Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Part_04_Individual_Project/0_overview.html">10. Individual Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Purdue-ENGR-13200/2026-fall/issues/new?title=Issue%20on%20page%20%2FPart_00_Course_Resources/programming_standards.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>MATLAB Programming Standards in ENGR 132</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-follow-programming-standards">Why Follow Programming Standards?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-submit">Before You Submit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-appropriate-code-template">Use the Appropriate Code Template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-the-header">Complete the Header</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#program-description-all-scripts-and-functions">Program Description — All Scripts and Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#author-information-all-scripts-and-functions">Author Information — All Scripts and Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-call-functions-only">Function Call — Functions Only</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output-arguments-functions-only">Input and Output Arguments — Functions Only</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-function-header">Example Function Header</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#organize-code-properly">Organize Code Properly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-your-code">Comment Your Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format-for-readability">Format for Readability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whitespace">Whitespace</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-use-of-whitespace">Poor Use of Whitespace</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#good-use-of-whitespace">Good Use of Whitespace</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">Indentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structure">Selection Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#repetition-structure">Repetition Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-structure">Nested Structure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-appropriate-variables">Use Appropriate Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-variable-names">Poor Variable Names</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-variable-names">Descriptive Variable Names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppress-command-outputs">Suppress Command Outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimize-hardcoding">Minimize Hardcoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardcoded-values">Hardcoded Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#values-assigned-to-variables">Values Assigned to Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appropriate-use-of-literal-values">Appropriate Use of Literal Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files">Data Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-indices">Array Indices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-global-variables">Avoid Global Variables</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="matlab-programming-standards-in-engr-132">
+<span id="start-here-prog-standards"></span><h1>MATLAB Programming Standards in ENGR 132<a class="headerlink" href="#matlab-programming-standards-in-engr-132" title="Link to this heading">#</a></h1>
+<p>Programming standards are guidelines for writing clear, well-documented code that can
+be understood and used by others. All MATLAB code submitted in ENGR 132 must follow the standards described on this page.</p>
+<section id="why-follow-programming-standards">
+<h2>Why Follow Programming Standards?<a class="headerlink" href="#why-follow-programming-standards" title="Link to this heading">#</a></h2>
+<p>Following programming standards helps you:</p>
+<ul class="simple">
+<li><p><strong>Write readable code.</strong> Your code should be understandable by team members, graders, instructors, and future colleagues.</p></li>
+<li><p><strong>Reduce errors.</strong> Well-organized, readable code is easier to test, debug, and modify.</p></li>
+<li><p><strong>Develop good programming habits.</strong> Consistently applying programming standards helps you write code that is easier to maintain and reuse.</p></li>
+</ul>
+<div class="note admonition">
+<p class="admonition-title">Standards in Course Examples</p>
+<p>Course examples will follow these programming standards whenever possible. Some examples may omit headers or comments for brevity; this does not change the requirements for submitted assignments.</p>
+</div>
+</section>
+<section id="before-you-submit">
+<h2>Before You Submit<a class="headerlink" href="#before-you-submit" title="Link to this heading">#</a></h2>
+<p>Before submitting a MATLAB file, verify that your code:</p>
+<ul class="simple">
+<li><p>uses the appropriate ENGR 132 template;</p></li>
+<li><p>includes a complete header;</p></li>
+<li><p>is organized using the sections provided in the template;</p></li>
+<li><p>includes clear and useful comments;</p></li>
+<li><p>uses consistent whitespace and indentation;</p></li>
+<li><p>uses valid, descriptive variable names;</p></li>
+<li><p>suppresses unintended Command Window output;</p></li>
+<li><p>avoids unnecessary hardcoding; and</p></li>
+<li><p>does not use global variables unless specifically instructed.</p></li>
+</ul>
+</section>
+<section id="use-the-appropriate-code-template">
+<h2>Use the Appropriate Code Template<a class="headerlink" href="#use-the-appropriate-code-template" title="Link to this heading">#</a></h2>
+<p>Use an ENGR 132 template for all MATLAB files submitted with an assignment. Two general templates are available:</p>
+<ul class="simple">
+<li><p><strong>Script template:</strong> Use when creating a MATLAB script.<br />
+<a class="reference download internal" download="" href="../_downloads/9d456476daced0bf6395803edb254aff/ENGR132_script_template.m"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">ENGR</span> <span class="pre">132</span> <span class="pre">MATLAB</span> <span class="pre">Script</span> <span class="pre">Template</span></code></a></p></li>
+<li><p><strong>Function template:</strong> Use when creating a user-defined function.<br />
+<a class="reference download internal" download="" href="../_downloads/ccfdfaae70b969daa284bd7ec22ac212/ENGR132_function_template.m"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">ENGR</span> <span class="pre">132</span> <span class="pre">MATLAB</span> <span class="pre">Function</span> <span class="pre">Template</span></code></a></p></li>
+</ul>
+<p>Some assignments provide a problem-specific template. When one is provided, use that template instead of the general course template.</p>
+<p>Each template includes a header at the beginning of the <code class="docutils literal notranslate"><span class="pre">.m</span></code> file. Complete the header for every MATLAB file you submit for a grade.</p>
+</section>
+<section id="complete-the-header">
+<h2>Complete the Header<a class="headerlink" href="#complete-the-header" title="Link to this heading">#</a></h2>
+<p>The header is the comment block at the beginning of a MATLAB file. It provides information about the program, its author, and how the file should be used.</p>
+<p>All MATLAB files submitted in ENGR 132 must include a complete header. Headers for both scripts and functions include a program description and author information. Function
+headers also include the function call and descriptions of the input and output arguments.</p>
+<p>MATLAB displays information from the header in the Command Window when a user accesses the file using the <code class="docutils literal notranslate"><span class="pre">help</span></code> command. A complete header should provide enough information
+for another user to understand the purpose of the file and how to use it.</p>
+<section id="program-description-all-scripts-and-functions">
+<h3>Program Description — All Scripts and Functions<a class="headerlink" href="#program-description-all-scripts-and-functions" title="Link to this heading">#</a></h3>
+<p>The program description briefly explains the purpose of the MATLAB file and what it is expected to accomplish. Write a clear and concise description that allows another user
+to understand what the code does without reading the entire file.</p>
+</section>
+<section id="author-information-all-scripts-and-functions">
+<h3>Author Information — All Scripts and Functions<a class="headerlink" href="#author-information-all-scripts-and-functions" title="Link to this heading">#</a></h3>
+<p>Complete the author information in the header of every MATLAB file you submit:</p>
+<ul class="simple">
+<li><p><strong>Assignment:</strong> Enter the assignment and problem number (e.g., <code class="docutils literal notranslate"><span class="pre">3.3.1</span></code>)</p></li>
+<li><p><strong>Author:</strong> Enter your name and official Purdue email address. Do not use an email alias.</p></li>
+<li><p><strong>Team ID:</strong> Enter your section and team number. Before teams are assigned, enter only your section number.</p></li>
+</ul>
+</section>
+<section id="function-call-functions-only">
+<h3>Function Call — Functions Only<a class="headerlink" href="#function-call-functions-only" title="Link to this heading">#</a></h3>
+<p>The function call line demonstrates how to call the function using its input and output arguments. Do not include the <code class="docutils literal notranslate"><span class="pre">function</span></code> keyword in this line.</p>
+</section>
+<section id="input-and-output-arguments-functions-only">
+<h3>Input and Output Arguments — Functions Only<a class="headerlink" href="#input-and-output-arguments-functions-only" title="Link to this heading">#</a></h3>
+<p>Define each input and output argument with a clear, concise description. Include units
+when applicable.</p>
+<p>If the function does not have input or output arguments, enter <code class="docutils literal notranslate"><span class="pre">None</span></code> in the appropriate
+location in the header.</p>
+</section>
+<section id="example-function-header">
+<h3>Example Function Header<a class="headerlink" href="#example-function-header" title="Link to this heading">#</a></h3>
+<p>The following example shows a complete header for a user-defined function:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>area<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">calc_circle_area</span><span class="p">(</span>radius<span class="p">)</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="c">% ENGR 132</span>
+<span class="c">% Program Description</span>
+<span class="c">%   Calculate the area of a circle from its radius.</span>
+<span class="c">%</span>
+<span class="c">% Assignment Information</span>
+<span class="c">%   Assignment:     3.3.1</span>
+<span class="c">%   Author:         Purdue Pete, boiler@purdue.edu</span>
+<span class="c">%   Team ID:        001-01</span>
+<span class="c">%</span>
+<span class="c">% Function Call</span>
+<span class="c">%   area = calc_circle_area(radius)</span>
+<span class="c">%</span>
+<span class="c">% Input Arguments</span>
+<span class="c">%   radius - Radius of the circle (cm)</span>
+<span class="c">%</span>
+<span class="c">% Output Arguments</span>
+<span class="c">%   area - Area of the circle (cm^2)</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+<span class="c">% Function code begins here</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="organize-code-properly">
+<h2>Organize Code Properly<a class="headerlink" href="#organize-code-properly" title="Link to this heading">#</a></h2>
+<p>Well-organized code is easier to read, understand, and debug. Organize your code using
+the sections provided in the ENGR 132 template:</p>
+<ul class="simple">
+<li><p><strong>Initialization:</strong> Define constants and variables, import data, and receive user input.</p></li>
+<li><p><strong>Calculations:</strong> Perform calculations and manipulate data.</p></li>
+<li><p><strong>Formatted Text &amp; Figure Displays:</strong> Create figures and display formatted results in
+the Command Window.</p></li>
+<li><p><strong>Results:</strong> Paste required Command Window output or other results as comments.</p></li>
+</ul>
+<p>Use the sections provided in the template for your assignment. If an assignment provides a problem-specific template, use the sections included in that template.</p>
+</section>
+<section id="comment-your-code">
+<h2>Comment Your Code<a class="headerlink" href="#comment-your-code" title="Link to this heading">#</a></h2>
+<p>Comments explain the purpose and logic of your code. Use comments to help another
+programmer understand what your code is doing and why. MATLAB uses <code class="docutils literal notranslate"><span class="pre">%</span></code> to begin a
+comment and ignores any text that follows <code class="docutils literal notranslate"><span class="pre">%</span></code> on that line.</p>
+<p>Use comments to:</p>
+<ul class="simple">
+<li><p>Describe variables and constants defined in the initialization section. Include units
+when applicable.</p></li>
+<li><p>Explain the purpose of a related group of commands with a concise comment before the
+code.</p></li>
+<li><p>Clarify code when its purpose may not be immediately apparent.</p></li>
+</ul>
+<p>Avoid commenting every individual line of code. Comments should explain the purpose of
+the code rather than simply restating the command.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<p>The following comment describes the purpose of a related group of plotting commands:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Plot force versus time and format for technical presentation</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">test_time</span><span class="p">,</span><span class="w"> </span><span class="n">applied_force</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="p">)</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&#39;Application of Force During Iron Beam Stress Test&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Force (N)&#39;</span><span class="p">)</span>
+<span class="nb">grid</span><span class="w"> </span><span class="n">on</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="format-for-readability">
+<h2>Format for Readability<a class="headerlink" href="#format-for-readability" title="Link to this heading">#</a></h2>
+<p>Consistent formatting makes code easier to read and helps communicate the structure of a program. Use whitespace and indentation to organize your code.</p>
+<section id="whitespace">
+<h3>Whitespace<a class="headerlink" href="#whitespace" title="Link to this heading">#</a></h3>
+<p>Use whitespace to separate sections of code and make individual commands easier to read. Compare the following examples.</p>
+<section id="poor-use-of-whitespace">
+<h4>Poor Use of Whitespace<a class="headerlink" href="#poor-use-of-whitespace" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define ball bearing parameters</span>
+<span class="n">bb_diameter</span><span class="p">=</span><span class="mf">0.25</span><span class="p">;</span><span class="c">% ball diameter, cm</span>
+<span class="n">steel_density</span><span class="p">=</span><span class="mf">8.05</span><span class="p">;</span><span class="c">% density of steel, g/cm^3</span>
+<span class="c">% Calculate the mass of the ball bearing in grams</span>
+<span class="n">bb_radius</span><span class="p">=</span><span class="n">bb_diameter</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="n">bb_vol</span><span class="p">=</span><span class="mi">4</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="n">bb_radius</span><span class="o">^</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="p">;</span>
+<span class="n">bb_mass</span><span class="p">=</span><span class="n">steel_density</span><span class="o">*</span><span class="n">bb_vol</span><span class="p">;</span>
+<span class="c">% Display the mass to the Command Window</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;The ball bearing mass is %.2f grams.\n&#39;</span><span class="p">,</span><span class="n">bb_mass</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="good-use-of-whitespace">
+<h4>Good Use of Whitespace<a class="headerlink" href="#good-use-of-whitespace" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Define ball bearing parameters</span>
+<span class="n">bb_diameter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w">    </span><span class="c">% ball diameter, cm</span>
+<span class="n">steel_density</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">8.05</span><span class="p">;</span><span class="w">  </span><span class="c">% density of steel, g/cm^3</span>
+
+<span class="c">% Calculate the mass of the ball bearing in grams</span>
+<span class="n">bb_radius</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bb_diameter</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">bb_vol</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bb_radius</span><span class="o">^</span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">bb_mass</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">steel_density</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bb_vol</span><span class="p">;</span>
+
+<span class="c">% Display the mass to the Command Window</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;The ball bearing mass is %.2f grams.\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">bb_mass</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use whitespace consistently:</p>
+<ul class="simple">
+<li><p>Add a blank line between sections or related groups of code.</p></li>
+<li><p>Include spaces around mathematical, relational, and logical operators.</p></li>
+<li><p>Include a space after commas that separate function arguments or array elements.</p></li>
+<li><p>Use spaces to align related end-of-line comments when doing so improves readability.</p></li>
+</ul>
+</section>
+</section>
+<section id="indentation">
+<h3>Indentation<a class="headerlink" href="#indentation" title="Link to this heading">#</a></h3>
+<p>Indentation shows the structure of selection and repetition structures. Indent all commands contained within a selection or repetition structure. Increase the indentation
+level for each nested structure.</p>
+<div class="note admonition">
+<p class="admonition-title">MATLAB vs. Python</p>
+<p>In Python, indentation is part of the syntax and determines which commands belong to a
+code structure. In MATLAB, keywords such as <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>, and <code class="docutils literal notranslate"><span class="pre">end</span></code> define the
+structure, so indentation does not affect how the code executes. However, proper
+indentation is still required in ENGR 132 because it makes the structure of your code
+clear and easier to read.</p>
+</div>
+<section id="selection-structure">
+<h4>Selection Structure<a class="headerlink" href="#selection-structure" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">new_temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">temp_matrix</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">temp_matrix</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="n">new_temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">temp_matrix</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">temp_matrix</span><span class="p">(</span><span class="n">r</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="repetition-structure">
+<h4>Repetition Structure<a class="headerlink" href="#repetition-structure" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">new_temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temp_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">);</span>
+<span class="n">temp_increase</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="n">new_temp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">boil_point</span>
+<span class="w">    </span><span class="n">new_temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">new_temp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">temp_increase</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="nested-structure">
+<h4>Nested Structure<a class="headerlink" href="#nested-structure" title="Link to this heading">#</a></h4>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Please enter a matrix with dimensions of at least 2x2&#39;</span><span class="p">)</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">m</span>
+<span class="w">            </span><span class="n">new_temp</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temp_update</span><span class="p">(</span><span class="n">temp_matrix</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">);</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="use-appropriate-variables">
+<h2>Use Appropriate Variables<a class="headerlink" href="#use-appropriate-variables" title="Link to this heading">#</a></h2>
+<p>Use descriptive variable names that clearly communicate what the variable represents.
+Avoid vague names when a more meaningful name can be used.</p>
+<p>Compare the following examples.</p>
+<section id="poor-variable-names">
+<h3>Poor Variable Names<a class="headerlink" href="#poor-variable-names" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">88</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="descriptive-variable-names">
+<h3>Descriptive Variable Names<a class="headerlink" href="#descriptive-variable-names" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">num_students</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="n">avg_grade</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">88</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> do not communicate what the values represent. The variables <code class="docutils literal notranslate"><span class="pre">num_students</span></code> and <code class="docutils literal notranslate"><span class="pre">avg_grade</span></code> make their purposes clear.</p>
+<p>When naming and using variables:</p>
+<ul class="simple">
+<li><p>Use valid, descriptive variable names.</p></li>
+<li><p>Use a consistent naming style, such as <code class="docutils literal notranslate"><span class="pre">snake_case</span></code> or <code class="docutils literal notranslate"><span class="pre">camelCase</span></code>, for variable names with multiple words.</p></li>
+<li><p>Use only letters, numbers, and underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>) in variable names. Variable names must begin with a letter.</p></li>
+<li><p>Do not use variable names that overwrite MATLAB built-in functions or constants.</p></li>
+<li><p>Assign only one variable per line.</p></li>
+<li><p>Assign calculation results to descriptive variables when the result will be used later
+in the program.</p></li>
+</ul>
+</section>
+</section>
+<section id="suppress-command-outputs">
+<h2>Suppress Command Outputs<a class="headerlink" href="#suppress-command-outputs" title="Link to this heading">#</a></h2>
+<p>MATLAB displays the result of a variable assignment or calculation in the Command Window
+unless the command ends with a semicolon (<code class="docutils literal notranslate"><span class="pre">;</span></code>). Use semicolons to suppress output that
+you do not intentionally want to display.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">base</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="nb">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="n">area_tri</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">height</span><span class="p">;</span>
+<span class="n">area_para</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">height</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The semicolon at the end of each command prevents MATLAB from displaying the values of
+<code class="docutils literal notranslate"><span class="pre">base</span></code>, <code class="docutils literal notranslate"><span class="pre">height</span></code>, <code class="docutils literal notranslate"><span class="pre">area_tri</span></code>, and <code class="docutils literal notranslate"><span class="pre">area_para</span></code> in the Command Window.</p>
+<p>While developing and debugging your code, you may temporarily remove semicolons to
+inspect values. Before submitting your code, suppress any output that is not intentionally
+displayed.</p>
+<p>A semicolon is not required after commands that intentionally produce output, such as
+<code class="docutils literal notranslate"><span class="pre">fprintf</span></code> or <code class="docutils literal notranslate"><span class="pre">plot</span></code>.</p>
+</section>
+<section id="minimize-hardcoding">
+<h2>Minimize Hardcoding<a class="headerlink" href="#minimize-hardcoding" title="Link to this heading">#</a></h2>
+<p>Hardcoding occurs when a value that could change or be determined programmatically is
+written directly into the code. Avoid unnecessary hardcoding so your program can adapt
+when inputs or data change.</p>
+<p>Compare the following examples.</p>
+<section id="hardcoded-values">
+<h3>Hardcoded Values<a class="headerlink" href="#hardcoded-values" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">area_tri</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="n">area_para</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If the base or height changes, each occurrence of the value must be found and updated.</p>
+</section>
+<section id="values-assigned-to-variables">
+<h3>Values Assigned to Variables<a class="headerlink" href="#values-assigned-to-variables" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">base</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="nb">height</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+
+<span class="n">area_tri</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">height</span><span class="p">;</span>
+<span class="n">area_para</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">height</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Using variables allows the values of <code class="docutils literal notranslate"><span class="pre">base</span></code> and <code class="docutils literal notranslate"><span class="pre">height</span></code> to be updated in one location.
+The calculations then use the updated values automatically.</p>
+</section>
+<section id="appropriate-use-of-literal-values">
+<h3>Appropriate Use of Literal Values<a class="headerlink" href="#appropriate-use-of-literal-values" title="Link to this heading">#</a></h3>
+<p>Not every value written directly in code is considered improper hardcoding. Literal
+values may be appropriate when they are fixed by the calculation or programming
+structure.</p>
+<p>Examples include:</p>
+<ul class="simple">
+<li><p>mathematical coefficients, such as <code class="docutils literal notranslate"><span class="pre">0.5</span></code> in the area of a triangle;</p></li>
+<li><p>fixed array indices when the position is specified by the problem; and</p></li>
+<li><p>values used to define or control a repetition structure when appropriate for the problem.</p></li>
+</ul>
+</section>
+<section id="data-files">
+<h3>Data Files<a class="headerlink" href="#data-files" title="Link to this heading">#</a></h3>
+<p>When an assignment provides a data file, import the data into MATLAB using an appropriate
+function. Do not manually copy the provided data values into an array in your script or
+function.</p>
+</section>
+<section id="array-indices">
+<h3>Array Indices<a class="headerlink" href="#array-indices" title="Link to this heading">#</a></h3>
+<p>A fixed array index is appropriate when the position is known and does not depend on the
+data. For example, the following code extracts the third row of a matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">magic</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<span class="n">matrix_a_row3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">matrix_a</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="p">:);</span>
+</pre></div>
+</div>
+<p>When an index depends on the contents or size of the data, determine the index programmatically rather than hardcoding a value that may change.</p>
+</section>
+</section>
+<section id="avoid-global-variables">
+<h2>Avoid Global Variables<a class="headerlink" href="#avoid-global-variables" title="Link to this heading">#</a></h2>
+<p>Do not use global variables in ENGR 132 unless specifically instructed to do so. Global
+variables can make programs more difficult to understand, debug, and modify because
+their values can be accessed and changed from multiple locations.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Part_00_Course_Resources"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="course_software.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Course Software</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../glue_factory.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Glue Factory</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-follow-programming-standards">Why Follow Programming Standards?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-you-submit">Before You Submit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-appropriate-code-template">Use the Appropriate Code Template</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-the-header">Complete the Header</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#program-description-all-scripts-and-functions">Program Description — All Scripts and Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#author-information-all-scripts-and-functions">Author Information — All Scripts and Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-call-functions-only">Function Call — Functions Only</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output-arguments-functions-only">Input and Output Arguments — Functions Only</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-function-header">Example Function Header</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#organize-code-properly">Organize Code Properly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment-your-code">Comment Your Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#format-for-readability">Format for Readability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whitespace">Whitespace</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-use-of-whitespace">Poor Use of Whitespace</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#good-use-of-whitespace">Good Use of Whitespace</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indentation">Indentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structure">Selection Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#repetition-structure">Repetition Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-structure">Nested Structure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-appropriate-variables">Use Appropriate Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-variable-names">Poor Variable Names</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptive-variable-names">Descriptive Variable Names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suppress-command-outputs">Suppress Command Outputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimize-hardcoding">Minimize Hardcoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hardcoded-values">Hardcoded Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#values-assigned-to-variables">Values Assigned to Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appropriate-use-of-literal-values">Appropriate Use of Literal Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-files">Data Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-indices">Array Indices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#avoid-global-variables">Avoid Global Variables</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="/fall-2026/Appendices/contributors.html">Contributors</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 All rights reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
