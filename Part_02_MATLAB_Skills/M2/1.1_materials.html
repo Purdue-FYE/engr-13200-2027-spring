@@ -1,0 +1,1826 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.1.1. PCMs: Data Manipulation and Visualization &#8212; Purdue University ENGR 13200</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=6361fafb" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Part_02_MATLAB_Skills/M2/1.1_materials';</script>
+    <link rel="icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.1.2. PCA: Array Operations in MATLAB" href="tasks/pre_1/instructions.html" />
+    <link rel="prev" title="5.1. Pre-Class Assignments" href="1_preclass_overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Purdue University ENGR 13200 - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Purdue University ENGR 13200 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to ENGR 13200
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Welcome to ENGR 132</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/course_schedule.html">Course Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/meet_the_team.html">Meet Your Instructional Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/help_sessions.html">Help Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/course_software.html">Course Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/programming_standards.html">Programming Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glue_factory.html">Glue Factory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FYE Student Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/ebec_studio.html">FYE-EBEC Undergraduate Coding and Debugging Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/fye_hub.html">FYE Hub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/0_overview.html">1. Course Policies and Assessments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/ind_1/instructions.html">1.1. Course Policies Exploration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/1_exam-overview.html">1.2. Exams in ENGR 132</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/exam_1/instructions.html">1.2.1. Exam 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/exam_2/instructions.html">1.2.2. Exam 2</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/0_overview.html">2. Artificial Intelligence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_1/instructions.html">2.1. AI: AI Assignment 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_2/instructions.html">2.2. AI: AI Assignment 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_3/instructions.html">2.3. AI: AI Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/0_overview.html">3. Teaming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CATME_instructions.html">3.1. CATME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CodeOfCoop_inst.html">3.2. TM: Code of Cooperation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CodeOfCoop_revisit_inst.html">3.3. TM: Code of Cooperation Revisit</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MATLAB Skills</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M1/0_overview.html">4. MATLAB Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M1/1_preclass_overview.html">4.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M1/1.1_materials.html">4.1.1. PCMs: MATLAB Foundations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/pre_1/instructions.html">4.1.2. PCA: Engineering Calculations in MATLAB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M1/2_inclass_overview.html">4.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/ica_1/instructions.html">4.2.1. ICA: MATLAB Onramp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/ica_2/instructions.html">4.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="0_overview.html">5. Data Manipulation and Visualization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="1_preclass_overview.html">5.1. Pre-Class Assignments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">5.1.1. PCMs: Data Manipulation and Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/pre_1/instructions.html">5.1.2. PCA: Array Operations in MATLAB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/pre_2/instructions.html">5.1.3. PCA: Importing and Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="2_inclass_overview.html">5.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ica_1/instructions.html">5.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ica_2/instructions.html">5.2.2. ICA: Team Plan - Data Manipulation and Visualiztion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="3_assignment_overview.html">5.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ind_1/instructions.html">5.3.1. MA: Data Manipulation and Visualization</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M3/0_overview.html">6. Logic and Modularity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M3/1_preclass_overview.html">6.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M3/1.1_materials.html">6.1.1. PCMs: Logic and Modularity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/pre_1/instructions.html">6.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/pre_2/instructions.html">6.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M3/2_inclass_overview.html">6.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/ica_1/instructions.html">6.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/ica_2/instructions.html">6.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M3/3_assignment_overview.html">6.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/ind_1/instructions.html">6.3.1. MA: Logic and Modularity</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M4/0_overview.html">7. Looping Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M4/1_preclass_overview.html">7.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M4/1.1_materials.html">7.1.1. PCMs: Looping Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/pre_1/instructions.html">7.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/pre_2/instructions.html">7.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M4/2_inclass_overview.html">7.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ica_1/instructions.html">7.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ica_2/instructions.html">7.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M4/3_assignment_overview.html">7.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ind_1/instructions.html">7.3.1. MA: Looping Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ind_2/instructions.html">7.3.2. MA: Complex Loops</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M5/0_overview.html">8. Regression and Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/1_preclass_overview.html">8.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/1.1_materials.html">8.1.1. PCMs: Regression and Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/pre_1/instructions.html">8.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/pre_2/instructions.html">8.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/2_inclass_overview.html">8.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ica_1/instructions.html">8.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ica_2/instructions.html">8.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/3_assignment_overview.html">8.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ind_1/instructions.html">8.3.1. MA: Regression and Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Team Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_03_Team_Project/0_overview.html">9. Team Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_1/0_overview.html">9.1. Milestone 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_1/tasks/ind_1/instructions.html">9.1.1. M1: Milestone 1 - Individual</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_2/0_overview.html">9.2. Milestone 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_2/tasks/team_1/instructions.html">9.2.1. M2: Milestone 2 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_3/0_overview.html">9.3. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_3/tasks/team_1/instructions.html">9.3.1. M3: Milestone 3 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/0_overview.html">9.4. Milestone 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/tasks/ind_1/instructions.html">9.4.1. M4: Milestone 4 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/tasks/team_1/instructions.html">9.4.2. M4: Milestone 4 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_5/0_overview.html">9.5. Milestone 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_5/tasks/team_1/instructions.html">9.5.1. M5: Milestone 5 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/0_overview.html">9.6. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/tasks/ind_1/instructions.html">9.6.1. M6: Milestone 6 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/tasks/team_1/instructions.html">9.6.2. M6: Milestone 6 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_7/0_overview.html">9.7. Milestone 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_7/tasks/team_1/instructions.html">9.7.1. M7: Milestone 7 - Team</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Individual Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_04_Individual_Project/0_overview.html">10. Individual Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Purdue-ENGR-13200/2026-fall/issues/new?title=Issue%20on%20page%20%2FPart_02_MATLAB_Skills/M2/1.1_materials.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PCMs: Data Manipulation and Visualization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-in-matlab">Arrays in MATLAB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-vectors">Creating Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-assignment">Direct Assignment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-evenly-spaced-vectors">Creating Evenly Spaced Vectors</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transposing-vectors">Transposing Vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-matrices">Creating Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-arrays-with-built-in-functions">Creating Arrays with Built-In Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-arrays">Working with Arrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-array-size">Determining Array Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-indexing">Array Indexing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-elements">Copying Elements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#replacing-elements">Replacing Elements</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-shortcuts">Indexing Shortcuts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-colon-operator">Using the Colon Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-end">Using <code class="docutils literal notranslate"><span class="pre">end</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-indexing">Linear Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenating-arrays">Concatenating Arrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#horizontal-concatenation">Horizontal Concatenation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-concatenation">Vertical Concatenation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-and-matrices">Summary Statistics and Matrices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#element-by-element-operations">Element-by-Element Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-with-scalars-and-arrays">Operations with Scalars and Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data">Importing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-readmatrix">Using <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-imported-data">Working with Imported Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-nan-values">Handling <code class="docutils literal notranslate"><span class="pre">NaN</span></code> Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">Plotting Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-x-y-plot">Creating an x-y Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-plot-style">Selecting a Plot Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-a-plot-for-technical-presentation">Formatting a Plot for Technical Presentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-multiple-data-sets">Plotting Multiple Data Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-legend">Adding a Legend</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-plots-in-one-figure">Multiple Plots in One Figure</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-multiple-plots">Formatting Multiple Plots</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-checklist">Plotting Checklist</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><span class="raw-html"><div class="d-none"></span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\newcommand\blank{~\underline{\hspace{1.2cm}}~}\\% Bold symbols (vectors)
+\newcommand\bs[1]{\mathbf{#1}}\\% Differential
+\newcommand\dd[2][]{\mathrm{d}^{#1}{#2}}  % use as \dd, \dd{x}, or \dd[2]{x}\\% Poor man's siunitx
+\newcommand\unit[1]{\mathrm{#1}}
+\newcommand\num[1]{#1}
+\newcommand\qty[2]{#1~\unit{#2}}\\\newcommand\per{/}
+\newcommand\squared{{}^2}
+\newcommand\cubed{{}^3}
+%
+% Scale
+\newcommand\milli{\unit{m}}
+\newcommand\centi{\unit{c}}
+\newcommand\kilo{\unit{k}}
+\newcommand\mega{\unit{M}}
+%
+% Percent
+\newcommand\percent{\unit{\%}}
+%
+% Angle
+\newcommand\radian{\unit{rad}}
+\newcommand\degree{\unit{{\kern-4mu}^\circ}}
+%
+% Time
+\newcommand\second{\unit{s}}
+\newcommand\s{\second}
+\newcommand\minute{\unit{min}}
+\newcommand\hour{\unit{h}}
+%
+% Distance
+\newcommand\meter{\unit{m}}
+\newcommand\m{\meter}
+\newcommand\inch{\unit{in}}
+\newcommand\foot{\unit{ft}}
+%
+% Force
+\newcommand\newton{\unit{N}}
+\newcommand\kip{\unit{kip}} % kilopound in &quot;freedom&quot; units - edit made by Sri
+%
+% Mass
+\newcommand\gram{\unit{g}}
+\newcommand\g{\gram}
+\newcommand\kilogram{\unit{kg}}
+\newcommand\kg{\kilogram}
+\newcommand\grain{\unit{grain}}
+\newcommand\ounce{\unit{oz}}
+%
+% Temperature
+\newcommand\kelvin{\unit{K}}
+\newcommand\K{\kelvin}
+\newcommand\celsius{\unit{{}^\circ C}}
+\newcommand\C{\celsius}
+\newcommand\fahrenheit{\unit{{}^\circ F}}
+\newcommand\F{\fahrenheit}
+%
+% Area
+\newcommand\sqft{\unit{sq\,\foot}}  % square foot
+%
+% Volume
+\newcommand\liter{\unit{L}}
+\newcommand\gallon{\unit{gal}}
+%
+% Frequency
+\newcommand\hertz{\unit{Hz}}
+\newcommand\rpm{\unit{rpm}}
+%
+% Voltage
+\newcommand\volt{\unit{V}}
+\newcommand\V{\volt}
+\newcommand\millivolt{\milli\volt}
+\newcommand\mV{\milli\volt}
+\newcommand\kilovolt{\kilo\volt}
+\newcommand\kV{\kilo\volt}
+%
+% Current
+\newcommand\ampere{\unit{A}}
+\newcommand\A{\ampere}
+\newcommand\milliampereA{\milli\ampere}
+\newcommand\mA{\milli\ampere}
+\newcommand\kiloampereA{\kilo\ampere}
+\newcommand\kA{\kilo\ampere}
+%
+% Resistance
+\newcommand\ohm{\Omega}
+\newcommand\milliohm{\milli\ohm}
+\newcommand\kiloohm{\kilo\ohm} % correct SI spelling
+\newcommand\kilohm{\kilo\ohm} % &quot;American&quot; spelling used in siunitx
+\newcommand\megaohm{\mega\ohm} % correct SI spelling
+\newcommand\megohm{\mega\ohm} % &quot;American&quot; spelling used in siunitx
+%
+% Capacitance
+\newcommand\farad{\unit{F}}
+\newcommand\F{\farad}
+\newcommand\microfarad{\micro\farad}
+\newcommand\muF{\micro\farad}
+%
+% Inductance
+\newcommand\henry{\unit{H}}
+\newcommand\H{\henry}
+\newcommand\millihenry{\milli\henry}
+\newcommand\mH{\milli\henry}
+%
+% Power
+\newcommand\watt{\unit{W}}
+\newcommand\W{\watt}
+\newcommand\milliwatt{\milli\watt}
+\newcommand\mW{\milli\watt}
+\newcommand\kilowatt{\kilo\watt}
+\newcommand\kW{\kilo\watt}
+%
+% Energy
+\newcommand\joule{\unit{J}}
+\newcommand\J{\joule}
+%
+% Composite units
+%
+% Torque
+\newcommand\ozin{\unit{\ounce}\,\unit{in}}
+\newcommand\newtonmeter{\unit{\newton\,\meter}}
+%
+% Pressure
+\newcommand\psf{\unit{psf}}  % pounds per square foot
+\newcommand\pcf{\unit{pcf}}  % pounds per cubic foot
+\newcommand\pascal{\unit{Pa}}
+\newcommand\Pa{\pascal}
+\newcommand\ksi{\unit{ksi}} % kilopound per square inch
+\newcommand\bar{\unit{bar}}
+\end{aligned}\end{align} \]</div>
+<p><span class="raw-html"></div></span></p>
+<p>Oct 09, 2026 | 2833 words | 28 min read</p>
+<section class="tex2jax_ignore mathjax_ignore" id="pcms-data-manipulation-and-visualization">
+<span id="ma-m2-pre-class-mats"></span><h1><span class="section-number">5.1.1. </span>PCMs: Data Manipulation and Visualization<a class="headerlink" href="#pcms-data-manipulation-and-visualization" title="Link to this heading">#</a></h1>
+<p>MATLAB is designed to work efficiently with collections of data. In fact, the name MATLAB comes from <strong>matrix laboratory</strong>, and arrays are fundamental to how MATLAB stores and processes data.</p>
+<p>In Python, you often work with individual values or use additional libraries to efficiently perform operations on collections of numerical data. In MATLAB, vectors and matrices are built directly into the language. This makes it possible to perform calculations on entire collections of data without processing each value individually.</p>
+<p>In this module, you will learn how to create, access, modify, and perform calculations with arrays. You will also learn how to import data from external files and visualize data using professionally formatted plots.</p>
+<section id="arrays-in-matlab">
+<h2>Arrays in MATLAB<a class="headerlink" href="#arrays-in-matlab" title="Link to this heading">#</a></h2>
+<p>An <strong>array</strong> is a collection of data arranged in rows and/or columns. MATLAB commonly uses three types of arrays.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tbl-array-types">
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Array Types in MATLAB</span><a class="headerlink" href="#tbl-array-types" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Array Type</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>MATLAB Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Scalar</strong></p></td>
+<td><p>A single element</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scalar</span> <span class="pre">=</span> <span class="pre">5;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Vector</strong></p></td>
+<td><p>A one-dimensional array containing either a single row or a single column of elements</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">row_vector</span> <span class="pre">=</span> <span class="pre">[5</span> <span class="pre">1</span> <span class="pre">0</span> <span class="pre">10];</span></code> and <code class="docutils literal notranslate"><span class="pre">column_vector</span> <span class="pre">=</span> <span class="pre">[5;</span> <span class="pre">1;</span> <span class="pre">0;</span> <span class="pre">10];</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Matrix</strong></p></td>
+<td><p>A two-dimensional array containing multiple rows and columns</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">matrix</span> <span class="pre">=</span> <span class="pre">[1</span> <span class="pre">2</span> <span class="pre">3;</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6];</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <strong>dimensions</strong> of an array describe its number of rows and columns. In <a class="reference internal" href="#tbl-array-types"><span class="std std-ref">Array Types in MATLAB</span></a>, <code class="docutils literal notranslate"><span class="pre">row_vector</span></code> is a 1-by-4 array, <code class="docutils literal notranslate"><span class="pre">column_vector</span></code> is a 4-by-1 array, and <code class="docutils literal notranslate"><span class="pre">matrix</span></code> is a 2-by-3 array.</p>
+<section id="creating-vectors">
+<h3>Creating Vectors<a class="headerlink" href="#creating-vectors" title="Link to this heading">#</a></h3>
+<p>Vectors can be created in MATLAB by entering elements directly or by using commands that generate a sequence of elements.</p>
+<section id="direct-assignment">
+<h4>Direct Assignment<a class="headerlink" href="#direct-assignment" title="Link to this heading">#</a></h4>
+<p>Use square brackets (<code class="docutils literal notranslate"><span class="pre">[]</span></code>) to create a vector. Elements in a <strong>row vector</strong> can be separated by spaces or commas. For example, both <code class="docutils literal notranslate"><span class="pre">distance</span></code> and <code class="docutils literal notranslate"><span class="pre">elevation</span></code> are row vectors:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="mi">50</span><span class="p">];</span>
+<span class="n">elevation</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>To create a <strong>column vector</strong>, separate the elements with semicolons:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span><span class="w"> </span><span class="mi">50</span><span class="p">];</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-evenly-spaced-vectors">
+<h4>Creating Evenly Spaced Vectors<a class="headerlink" href="#creating-evenly-spaced-vectors" title="Link to this heading">#</a></h4>
+<p>MATLAB provides two common methods for creating vectors with evenly spaced elements: <strong>colon notation</strong> and the <code class="docutils literal notranslate"><span class="pre">linspace</span></code> function. The method you use depends on whether you know the desired <strong>step size</strong> or the desired <strong>number of elements</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table table-center" id="tbl-vector-creation">
+<caption><span class="caption-number">Table 5.2 </span><span class="caption-text">Comparison of Colon Notation and linspace</span><a class="headerlink" href="#tbl-vector-creation" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Colon Notation</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">linspace</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Use when you know…</strong></p></td>
+<td><p>The step size between elements</p></td>
+<td><p>The number of elements to create</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Syntax</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">start:step:end</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">linspace(start,</span> <span class="pre">end,</span> <span class="pre">number_of_values)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Example</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">distance</span> <span class="pre">=</span> <span class="pre">0:10:50;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">distance</span> <span class="pre">=</span> <span class="pre">linspace(0,</span> <span class="pre">50,</span> <span class="pre">6);</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Result</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[0</span> <span class="pre">10</span> <span class="pre">20</span> <span class="pre">30</span> <span class="pre">40</span> <span class="pre">50]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[0</span> <span class="pre">10</span> <span class="pre">20</span> <span class="pre">30</span> <span class="pre">40</span> <span class="pre">50]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both examples create the same row vector, but they define the spacing differently.</p>
+<p>With <strong>colon notation</strong>, MATLAB begins at the starting value and repeatedly adds the specified step size without exceeding the ending value. Therefore, the ending value may not always appear in the resulting vector.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">55</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>produces:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>0    10    20    30    40    50
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">linspace</span></code>, MATLAB creates the specified number of evenly spaced values between the starting and ending values. The starting and ending values are both included.</p>
+</section>
+</section>
+<section id="transposing-vectors">
+<h3>Transposing Vectors<a class="headerlink" href="#transposing-vectors" title="Link to this heading">#</a></h3>
+<p>A vector can be changed from a row vector to a column vector, or from a column vector to a row vector, using the <strong>transpose</strong> operation.</p>
+<p>For example, consider the following row vector:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="mi">50</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>The vector can be transposed using the dot-apostrophe (<code class="docutils literal notranslate"><span class="pre">.'</span></code>) operator:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">distance_column</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">distance</span><span class="p">.</span><span class="o">&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The resulting vector is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>     0
+    10
+    20
+    30
+    40
+    50
+</pre></div>
+</div>
+<p>MATLAB also provides the <code class="docutils literal notranslate"><span class="pre">transpose</span></code> function, which performs the same operation:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">distance_column</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">transpose</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-matrices">
+<h3>Creating Matrices<a class="headerlink" href="#creating-matrices" title="Link to this heading">#</a></h3>
+<p>A <strong>matrix</strong> is a two-dimensional array containing multiple rows and columns. Matrices are created using the same notation as vectors:</p>
+<ul class="simple">
+<li><p>Separate elements in the same row using spaces or commas.</p></li>
+<li><p>Separate rows using semicolons.</p></li>
+</ul>
+<p>For example, the following code creates a 3-by-4 matrix:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">;</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span><span class="p">;</span> <span class="mi">9</span> <span class="mi">10</span> <span class="mi">11</span> <span class="mi">12</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>For readability, a matrix can also be written across multiple lines:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Both methods create the same matrix:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>     1     2     3     4
+     5     6     7     8
+     9    10    11    12
+</pre></div>
+</div>
+<p>When creating a matrix, each row must contain the same number of elements.</p>
+</section>
+<section id="creating-arrays-with-built-in-functions">
+<h3>Creating Arrays with Built-In Functions<a class="headerlink" href="#creating-arrays-with-built-in-functions" title="Link to this heading">#</a></h3>
+<p>MATLAB includes built-in functions that can quickly create arrays with specified dimensions. These functions are useful when an array needs to be initialized before values are added or calculations are performed.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zeros(rows,</span> <span class="pre">columns)</span></code></p></td>
+<td><p>Creates an array containing only zeros</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">zeros(3,</span> <span class="pre">4)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ones(rows,</span> <span class="pre">columns)</span></code></p></td>
+<td><p>Creates an array containing only ones</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ones(2,</span> <span class="pre">5)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eye(n)</span></code></p></td>
+<td><p>Creates an <code class="docutils literal notranslate"><span class="pre">n</span></code> × <code class="docutils literal notranslate"><span class="pre">n</span></code> identity matrix</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eye(3)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>creates</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>     0     0     0     0
+     0     0     0     0
+     0     0     0     0
+</pre></div>
+</div>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_i3j56vik&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_10wfj295%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Assigning Vectors and Matrices"></iframe>
+</section>
+</section>
+<section id="working-with-arrays">
+<h2>Working with Arrays<a class="headerlink" href="#working-with-arrays" title="Link to this heading">#</a></h2>
+<p>After data are stored in an array, individual elements or groups of elements can be accessed and modified using <strong>indexing</strong>.</p>
+<section id="determining-array-size">
+<h3>Determining Array Size<a class="headerlink" href="#determining-array-size" title="Link to this heading">#</a></h3>
+<p>When working with arrays, it is often useful to determine how many elements an array contains or the dimensions of the array. MATLAB provides the <code class="docutils literal notranslate"><span class="pre">numel</span></code> and <code class="docutils literal notranslate"><span class="pre">size</span></code> functions for this purpose.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">numel</span></code> function returns the <strong>total number of elements</strong> in an array.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">12</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="mi">24</span><span class="p">];</span>
+
+<span class="n">num_values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">numel</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>num_values =
+
+     5
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">size</span></code> function returns the dimensions in an array.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w"> </span><span class="n">40</span><span class="w"> </span><span class="s">50</span><span class="w"> </span><span class="s">60]</span><span class="p">;</span>
+
+<span class="n">array_size</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>array_size = 
+
+    2   3
+</pre></div>
+</div>
+<p>For a two-dimensional array, the number of rows and columns can also be stored in separate variables using two outputs from <code class="docutils literal notranslate"><span class="pre">size</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">num_rows</span><span class="p">,</span><span class="w"> </span><span class="n">num_columns</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>num_rows =
+
+     2
+
+num_columns =
+
+     3
+</pre></div>
+</div>
+<p>A specific dimension can also be requested by providing a second input to <code class="docutils literal notranslate"><span class="pre">size</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">size(data,</span> <span class="pre">1)</span></code> returns the number of rows.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size(data,</span> <span class="pre">2)</span></code> returns the number of columns.</p></li>
+</ul>
+<div class="admonition-avoid-hardcoding admonition">
+<p class="admonition-title">Avoid Hardcoding</p>
+<p>Avoid hard-coding the number of elements, rows, or columns when the size of an array may change. Functions such as <code class="docutils literal notranslate"><span class="pre">numel</span></code> and <code class="docutils literal notranslate"><span class="pre">size</span></code> allow your code to adapt to the data.</p>
+</div>
+</section>
+<section id="array-indexing">
+<h3>Array Indexing<a class="headerlink" href="#array-indexing" title="Link to this heading">#</a></h3>
+<p>In MATLAB, each element of a matrix can be identified by its <strong>row</strong> and <strong>column</strong> position using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">column</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The row is specified first, followed by the column.</p>
+<div class="note admonition">
+<p class="admonition-title">MATLAB vs. Python</p>
+<p>MATLAB indexing begins at <strong>1</strong>, not 0. This is a common source of errors when moving from Python to MATLAB. For example, <code class="docutils literal notranslate"><span class="pre">data(1,</span> <span class="pre">1)</span></code> refers to the first row and first column.</p>
+</div>
+<p>The same indexing syntax is used to <strong>copy elements</strong> from an array and to <strong>replace elements</strong> within an array.</p>
+<section id="copying-elements">
+<h4>Copying Elements<a class="headerlink" href="#copying-elements" title="Link to this heading">#</a></h4>
+<p>Consider the following matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>To copy a single element, place the indexed expression on the <strong>right side</strong> of the assignment operator:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This stores the element <code class="docutils literal notranslate"><span class="pre">70</span></code> in <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<p>To copy multiple elements, use a range of indices:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This creates a 2-by-2 submatrix:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>values =
+
+    20    30
+    60    70
+</pre></div>
+</div>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_tl8lp4td&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_dur20wxj%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Array Indexing Copying Values"></iframe>
+</section>
+<section id="replacing-elements">
+<h4>Replacing Elements<a class="headerlink" href="#replacing-elements" title="Link to this heading">#</a></h4>
+<p>To replace an element in an existing array, place the indexed location on the <strong>left side</strong> of the assignment operator:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">75</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This updates the matrix to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>data =
+
+    10     20     30     40
+    50     60     75     80
+    90    100    110    120
+</pre></div>
+</div>
+<p>Multiple elements can also be replaced at once:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">25</span><span class="w"> </span><span class="mi">35</span><span class="p">;</span>
+<span class="w">                   </span><span class="n">65</span><span class="w"> </span><span class="s">75]</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>When replacing multiple elements, the dimensions of the replacement data must match the dimensions of the selected region.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_krna4itw&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_rummd5cp%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Array Indexing - Replacing Values"></iframe>
+</section>
+</section>
+<section id="indexing-shortcuts">
+<h3>Indexing Shortcuts<a class="headerlink" href="#indexing-shortcuts" title="Link to this heading">#</a></h3>
+<p>MATLAB provides shortcuts that make it easier to access portions of an array.</p>
+<section id="using-the-colon-operator">
+<h4>Using the Colon Operator<a class="headerlink" href="#using-the-colon-operator" title="Link to this heading">#</a></h4>
+<p>When used as an index, the colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>) represents <strong>all elements</strong> in a specified row or column.</p>
+<p>Consider the following matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">90</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>To access all elements in the second row:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">second_row</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="p">:);</span>
+</pre></div>
+</div>
+<p>To access all elements in the third column:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">third_column</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(:,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="using-end">
+<h4>Using <code class="docutils literal notranslate"><span class="pre">end</span></code><a class="headerlink" href="#using-end" title="Link to this heading">#</a></h4>
+<p>The keyword <code class="docutils literal notranslate"><span class="pre">end</span></code> represents the <strong>last index</strong> along a dimension of an array. This allows you to access elements relative to the end of an array without knowing its exact dimensions.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">end</span></code> can be used to access the last column of an array:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">last_column</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(:,</span><span class="w"> </span><span class="k">end</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It can also be combined with colon notation to create a range of indices. To access the second row through the last row:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">subset</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="p">:);</span>
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">end</span></code> represents the last index, it can also be used in expressions. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">last_two_columns</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(:,</span><span class="w"> </span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this expression:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">:</span></code> selects all rows.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end-1</span></code> represents the second-to-last column.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code> represents the last column.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end-1:end</span></code> creates a range containing the final two columns.</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">data</span></code> has four columns, <code class="docutils literal notranslate"><span class="pre">end</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">4</span></code> and <code class="docutils literal notranslate"><span class="pre">end-1</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">3</span></code>. Therefore,</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">(:,</span><span class="w"> </span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>is equivalent to:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">(:,</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">end</span></code> instead of hardcoding an index allows the code to adapt if the dimensions of the array change. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">final_values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(:,</span><span class="w"> </span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>always accesses the final two columns, regardless of the total number of columns in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<p>In contrast:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">final_values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(:,</span><span class="w"> </span><span class="mi">19</span><span class="p">:</span><span class="mi">20</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>only accesses the final two columns if <code class="docutils literal notranslate"><span class="pre">data</span></code> has exactly 20 columns.</p>
+<div class="note admonition">
+<p class="admonition-title">General Rule of Thumb</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">end</span></code> when the index depends on the size of the array, such as the last row, last column, or final several elements. Use a specific index when the position is fixed by the problem.</p>
+</div>
+</section>
+</section>
+<section id="linear-indexing">
+<h3>Linear Indexing<a class="headerlink" href="#linear-indexing" title="Link to this heading">#</a></h3>
+<p>In addition to specifying both a row and column, MATLAB allows elements of an array to be accessed using a single index. This is called <strong>linear indexing</strong>.</p>
+<p>When using linear indexing, MATLAB numbers the elements by moving <strong>down each column</strong> before moving to the next column.</p>
+<p>Consider the following matrix:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>The linear indices of the elements are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>Column 1</p></th>
+<th class="head text-center"><p>Column 2</p></th>
+<th class="head text-center"><p>Column 3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Row 1</strong></p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>7</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Row 2</strong></p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>5</p></td>
+<td class="text-center"><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Row 3</strong></p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>6</p></td>
+<td class="text-center"><p>9</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Therefore <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">=</span> <span class="pre">data(5);</span></code> would copy the element <code class="docutils literal notranslate"><span class="pre">50</span></code>.</p>
+<p>Linear indexing can also be used to access multiple elements:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span><span class="w">  </span><span class="c">% copies values 40, 70, and 20 </span>
+</pre></div>
+</div>
+<p>or nonconsecutive elements by providing a vector of indices:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">([</span><span class="mi">1</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">9</span><span class="p">]);</span><span class="w">   </span><span class="c">% copies values 10, 50, and 90 </span>
+</pre></div>
+</div>
+<p>Linear indexing can also be used to replace elements:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">55</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For two-dimensional arrays, row and column indexing is often easier to interpret when working with blocks of data. Linear indexing is particularly useful when working with vectors or when the position of an element is already known as a single index.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_rodnm07h&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_05sa4336%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Linear Indexing - Copying Values"></iframe>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_rro6ehhb&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_trnhfzql%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Linear Indexing - Replacing Values"></iframe>
+</section>
+<section id="concatenating-arrays">
+<h3>Concatenating Arrays<a class="headerlink" href="#concatenating-arrays" title="Link to this heading">#</a></h3>
+<p><strong>Concatenation</strong> combines two or more arrays into a larger array. Arrays can be concatenated horizontally or vertically as long as their dimensions are compatible.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_s7m7ky7f&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_aql5oma1%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Concatenating Arrays in MATLAB"></iframe>
+<section id="horizontal-concatenation">
+<h4>Horizontal Concatenation<a class="headerlink" href="#horizontal-concatenation" title="Link to this heading">#</a></h4>
+<p>Arrays can be placed side-by-side when they have the <strong>same number of rows</strong>. Use spaces or commas to concatenate arrays horizontally.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">20</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="mi">24</span><span class="p">];</span>
+<span class="n">pressure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">100</span><span class="w"> </span><span class="mi">105</span><span class="w"> </span><span class="mi">110</span><span class="p">];</span>
+
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">temperature</span><span class="w"> </span><span class="n">pressure</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>The resulting array is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>data =
+
+    20    22    24    100    105    110
+</pre></div>
+</div>
+</section>
+<section id="vertical-concatenation">
+<h4>Vertical Concatenation<a class="headerlink" href="#vertical-concatenation" title="Link to this heading">#</a></h4>
+<p>Arrays can be stacked when they have the <strong>same number of columns</strong>. Use a semicolon to concatenate arrays vertically.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">20</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="mi">24</span><span class="p">];</span>
+<span class="n">pressure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">100</span><span class="w"> </span><span class="mi">105</span><span class="w"> </span><span class="mi">110</span><span class="p">];</span>
+
+<span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">temperature</span><span class="p">;</span><span class="w"> </span><span class="n">pressure</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>The resulting array is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>data =
+
+     20     22     24
+    100    105    110
+</pre></div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Concatenation Dimensions</p>
+<p>For horizontal concatenation, the arrays must have the same number of <strong>rows</strong>. For vertical concatenation, the arrays must have the same number of <strong>columns</strong>.</p>
+</div>
+</section>
+</section>
+<section id="summary-statistics">
+<h3>Summary Statistics<a class="headerlink" href="#summary-statistics" title="Link to this heading">#</a></h3>
+<p>MATLAB includes built-in functions for calculating common summary statistics from arrays of data.</p>
+<p>Consider the following vector:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">21.2</span><span class="w"> </span><span class="mf">22.5</span><span class="w"> </span><span class="mf">20.8</span><span class="w"> </span><span class="mf">23.1</span><span class="w"> </span><span class="mf">22.5</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Common summary functions include:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mean</span></code></p></td>
+<td><p>Calculates the arithmetic mean</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mean(temperature)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">median</span></code></p></td>
+<td><p>Calculates the median</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">median(temperature)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mode</span></code></p></td>
+<td><p>Determines the most frequently occurring value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mode(temperature)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min</span></code></p></td>
+<td><p>Determines the minimum value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">min(temperature)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max</span></code></p></td>
+<td><p>Determines the maximum value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max(temperature)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">std</span></code></p></td>
+<td><p>Calculates the standard deviation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std(temperature)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">avg_temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+<span class="n">max_temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>avg_temperature =
+
+   22.0200
+
+max_temperature =
+
+   23.1000
+</pre></div>
+</div>
+<section id="summary-statistics-and-matrices">
+<h4>Summary Statistics and Matrices<a class="headerlink" href="#summary-statistics-and-matrices" title="Link to this heading">#</a></h4>
+<p>When a summary function is applied to a matrix, MATLAB performs the calculation <strong>column-wise by default</strong>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="w">        </span><span class="mi">70</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">];</span>
+
+<span class="n">column_means</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>produces:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>column_means =
+
+    40    50    60
+</pre></div>
+</div>
+<p>MATLAB calculates the mean of each column and returns the results as a row vector.</p>
+<p>To calculate a single statistic using <strong>all elements</strong> of a matrix, use <code class="docutils literal notranslate"><span class="pre">all</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">overall_mean</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>which produces:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>overall_mean =
+
+    50
+</pre></div>
+</div>
+<p>The “all” option can also be used with other summary functions when a single result for the entire array is needed.</p>
+</section>
+</section>
+</section>
+<section id="element-by-element-operations">
+<h2>Element-by-Element Operations<a class="headerlink" href="#element-by-element-operations" title="Link to this heading">#</a></h2>
+<p>MATLAB can perform calculations on entire arrays without processing each element individually. These calculations are called <strong>element-by-element operations</strong> because the operation is applied to corresponding elements of the arrays.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_g00kkiau&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_n5pslmoi%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Element by Element Operations"></iframe>
+<p>Consider the following vectors:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">panel_length</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="p">];</span>
+<span class="n">panel_width</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Addition and subtraction can be performed directly:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sum_values</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">panel_length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">panel_width</span><span class="p">;</span>
+<span class="n">difference</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">panel_length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">panel_width</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For multiplication, division, and exponentiation, use a period (<code class="docutils literal notranslate"><span class="pre">.</span></code>) before the operator.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head text-center"><p>MATLAB Operator</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Addition</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">panel_length</span> <span class="pre">+</span> <span class="pre">panel_width</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Subtraction</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">panel_length</span> <span class="pre">-</span> <span class="pre">panel_width</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Multiplication</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">.*</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">panel_length</span> <span class="pre">.*</span> <span class="pre">panel_width</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Division</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">./</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">panel_length</span> <span class="pre">./</span> <span class="pre">panel_width</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Exponentiation</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">.^</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">panel_length</span> <span class="pre">.^</span> <span class="pre">2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">area</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">panel_length</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">panel_width</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>produces:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>area =
+
+     2     8    18    32
+</pre></div>
+</div>
+<p>Each element in <code class="docutils literal notranslate"><span class="pre">panel_length</span></code> is multiplied by the corresponding element in <code class="docutils literal notranslate"><span class="pre">panel_width</span></code>.</p>
+<section id="operations-with-scalars-and-arrays">
+<h3>Operations with Scalars and Arrays<a class="headerlink" href="#operations-with-scalars-and-arrays" title="Link to this heading">#</a></h3>
+<p>Element-by-element calculations can also involve a scalar and an array. A scalar is applied to each element of the array.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">40</span><span class="p">];</span>
+
+<span class="n">new_distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>produces:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>new_distance =
+
+    15    25    35    45
+</pre></div>
+</div>
+<p>Similarly, an array can be multiplied or divided by a scalar without using a period:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">double_distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="n">half_distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>However, some operations require the element-by-element operator depending on the order of the operands. For example, dividing a scalar by an array requires <code class="docutils literal notranslate"><span class="pre">./</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">test_time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="n">distance</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and raising each element of an array to a power requires <code class="docutils literal notranslate"><span class="pre">.^</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">distance_squared</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="importing-data">
+<h2>Importing Data<a class="headerlink" href="#importing-data" title="Link to this heading">#</a></h2>
+<p>Engineering data are often collected or provided in external files rather than entered directly into a MATLAB script. MATLAB can import numeric data from files such as <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, Excel, and text files using the <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> function.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_19b4r9dn&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_viyxbngj%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Importing Data"></iframe>
+<section id="using-readmatrix">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code><a class="headerlink" href="#using-readmatrix" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> function reads data from an external file and stores the result as an array.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;experiment_data.csv&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The general syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">variable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;filename&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The data file must be accessible to MATLAB. When working with course files, the data file should be saved in the same folder as the MATLAB script unless another file location is specified.</p>
+<p>Use a descriptive variable name when storing imported data. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature_data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;temperature_data.csv&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="working-with-imported-data">
+<h3>Working with Imported Data<a class="headerlink" href="#working-with-imported-data" title="Link to this heading">#</a></h3>
+<p>Once the data are imported, the indexing techniques from earlier in this module can be used to extract the rows or columns needed for analysis.</p>
+<p>For example, if the first column contains time and the second column contains temperature:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">time_col</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature_data</span><span class="p">(:,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature_data</span><span class="p">(:,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This creates separate vectors containing the time and temperature data to use later in the script.</p>
+</section>
+<section id="handling-nan-values">
+<h3>Handling <code class="docutils literal notranslate"><span class="pre">NaN</span></code> Values<a class="headerlink" href="#handling-nan-values" title="Link to this heading">#</a></h3>
+<p>When importing data using <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code>, MATLAB may represent text or missing numeric data as <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, which stands for <strong>Not a Number</strong>.</p>
+<p>For example, consider a file containing:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Time,Temperature
+0,20.1
+1,21.3
+2,22.0
+</pre></div>
+</div>
+<p>When the file is imported using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;temperature_data.csv&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>the text in the header may appear as <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values in the imported array.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>data =
+
+   NaN    NaN
+     0   20.1
+     1   21.3
+     2   22.0
+</pre></div>
+</div>
+<p>Array indexing can be used to extract only the numeric data needed for analysis:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">time_col</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this example, indexing begins at row 2 to exclude the header row represented by <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p>
+<p>Alternatively, if the number of header lines is known, the <code class="docutils literal notranslate"><span class="pre">NumHeaderLines</span></code> option can be used with <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> to skip those lines when importing the data.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;temperature_data.csv&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;NumHeaderLines&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this example, MATLAB skips the first line of the file and imports the remaining data.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>data =
+
+     0   20.1
+     1   21.3
+     2   22.0
+</pre></div>
+</div>
+</section>
+</section>
+<section id="plotting-data">
+<h2>Plotting Data<a class="headerlink" href="#plotting-data" title="Link to this heading">#</a></h2>
+<p>Plots are used to visualize relationships between variables and communicate patterns in engineering data. In MATLAB, the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function creates an x-y plot using two vectors of corresponding data.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_9szrchwl&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_8muwf97b%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Plotting in MATLAB"></iframe>
+<section id="creating-an-x-y-plot">
+<h3>Creating an x-y Plot<a class="headerlink" href="#creating-an-x-y-plot" title="Link to this heading">#</a></h3>
+<p>The basic syntax for creating an x-y plot is <code class="docutils literal notranslate"><span class="pre">plot(x,y)</span></code>. The first input contains the <strong>independent variable</strong> plotted on the x-axis, and the second input contains the <strong>dependent variable</strong> plotted on the y-axis.</p>
+<div class="plot-example" markdown="1">
+<div class="plot-example-text" markdown="1">
+<p>For example, suppose <code class="docutils literal notranslate"><span class="pre">acceleration</span></code> and <code class="docutils literal notranslate"><span class="pre">voltage</span></code> contain experimental data from an accelerometer test:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">plot</span><span class="p">(</span><span class="n">acceleration</span><span class="p">,</span><span class="w"> </span><span class="n">voltage</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, MATLAB plots the data using a solid line connecting consecutive data points.</p>
+<p>Although MATLAB successfully creates a plot, the default display is not necessarily the most appropriate way to represent the data. In this example, each point represents an individual experimental measurement. Connecting the measurements with lines implies a relationship between consecutive observations that may not be meaningful.</p>
+</div>
+<div class="plot-example-image" markdown="1">
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="../../_images/plot1.png"><img alt="Voltage versus acceleration data connected by lines between consecutive data points." src="../../_images/plot1.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Voltage versus acceleration using the default MATLAB line style.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="selecting-a-plot-style">
+<h3>Selecting a Plot Style<a class="headerlink" href="#selecting-a-plot-style" title="Link to this heading">#</a></h3>
+<p>The way data are displayed should reflect the type of data being presented. MATLAB allows the appearance of a plot to be controlled using a <strong>formatting string</strong> as an additional input to the <code class="docutils literal notranslate"><span class="pre">plot</span></code> function.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;format&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For experimental or measured data, individual <strong>markers</strong> can be used to show each observation without connecting consecutive data points.</p>
+<div class="plot-example" markdown="1">
+<div class="plot-example-text" markdown="1">
+<p>For example, the voltage measurements can be plotted using black circle markers (<code class="docutils literal notranslate"><span class="pre">ko</span></code>):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">plot</span><span class="p">(</span><span class="n">acceleration</span><span class="p">,</span><span class="w"> </span><span class="n">voltage</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ko&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using markers makes each experimental observation visible without implying that consecutive observations are directly connected.</p>
+<p>In contrast, a line is appropriate when the values represent a continuous relationship, such as a theoretical or modeled relationship.</p>
+</div>
+<div class="plot-example-image" markdown="1">
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../../_images/plot2.png"><img alt="Voltage versus acceleration data displayed using individual circle markers." src="../../_images/plot2.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Voltage versus acceleration displayed using markers.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Customize Plot Appearance</p>
+<p>Visit <a class="reference external" href="https://www.mathworks.com/help/matlab/ref/plot.html#btzitot_sep_mw_3a76f056-2882-44d7-8e73-c695c0c54ca8">MATLAB plot Documentation</a> to explore additional line styles, markers, colors, and formatting options.</p>
+</div>
+</section>
+<section id="formatting-a-plot-for-technical-presentation">
+<h3>Formatting a Plot for Technical Presentation<a class="headerlink" href="#formatting-a-plot-for-technical-presentation" title="Link to this heading">#</a></h3>
+<p>A technical plot should provide enough information for the reader to understand the data being presented. This includes a descriptive title, labeled axes, units when applicable, and grid lines that help the reader interpret values.</p>
+<p>MATLAB provides several functions for adding these elements to a plot.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">title('text')</span></code></p></td>
+<td><p>Adds a title to the plot</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xlabel('text')</span></code></p></td>
+<td><p>Labels the x-axis</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ylabel('text')</span></code></p></td>
+<td><p>Labels the y-axis</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grid</span> <span class="pre">on</span></code></p></td>
+<td><p>Displays grid lines</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="plot-example" markdown="1">
+<div class="plot-example-text" markdown="1">
+<p>The voltage and acceleration plot can be formatted using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">plot</span><span class="p">(</span><span class="n">acceleration</span><span class="p">,</span><span class="w"> </span><span class="n">voltage</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ko&#39;</span><span class="p">)</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&#39;Voltage vs Acceleration for Test 1&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Acceleration (m/s^2)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Voltage (V)&#39;</span><span class="p">)</span>
+<span class="nb">grid</span><span class="w"> </span><span class="n">on</span>
+</pre></div>
+</div>
+<p>The title identifies the data being presented, while the axis labels identify the variables and their units. Grid lines make it easier to estimate values from the plot.</p>
+</div>
+<div class="plot-example-image" markdown="1">
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../../_images/plot3.png"><img alt="Voltage versus acceleration data shown with markers, labeled axes, a title, and grid lines." src="../../_images/plot3.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">Formatted voltage versus acceleration plot.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="plotting-multiple-data-sets">
+<h3>Plotting Multiple Data Sets<a class="headerlink" href="#plotting-multiple-data-sets" title="Link to this heading">#</a></h3>
+<p>Multiple data sets can be displayed on the same axes to make comparisons between related data easier.</p>
+<p>By default, calling <code class="docutils literal notranslate"><span class="pre">plot</span></code> again replaces the existing plot. The <code class="docutils literal notranslate"><span class="pre">hold</span> <span class="pre">on</span></code> command keeps the current plot so that additional data can be added to the same axes. The optional <code class="docutils literal notranslate"><span class="pre">hold</span> <span class="pre">off</span></code> command returns the axes to MATLAB’s default plotting behavior.</p>
+<div class="plot-example" markdown="1">
+<div class="plot-example-text" markdown="1">
+<p>For example, data from two sensor tests can be plotted on the same axes:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_1</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_1</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;o&#39;</span><span class="p">)</span>
+<span class="nb">hold</span><span class="w"> </span><span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_2</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_2</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;o&#39;</span><span class="p">)</span>
+<span class="nb">hold</span><span class="w"> </span><span class="n">off</span>
+</pre></div>
+</div>
+<p>Each call to <code class="docutils literal notranslate"><span class="pre">plot</span></code> adds a different data set to the same axes.</p>
+</div>
+<div class="plot-example-image" markdown="1">
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../../_images/plot4.png"><img alt="Voltage versus acceleration data from two sensor tests displayed on the same axes." src="../../_images/plot4.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Voltage and acceleration data from two sensor tests.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The data sets should also be formatted so that they are visually distinguishable.</p>
+<div class="note admonition">
+<p class="admonition-title">Why is “hold off” optional?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">hold</span> <span class="pre">off</span></code> command is not always required. It returns the current axes to the default behavior in which a new plotting command replaces the existing plot.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">hold</span> <span class="pre">off</span></code> when additional plots later in the script should <strong>not</strong> be added to the same axes. If no additional plotting commands follow, <code class="docutils literal notranslate"><span class="pre">hold</span> <span class="pre">off</span></code> may be omitted.</p>
+</div>
+<section id="adding-a-legend">
+<h4>Adding a Legend<a class="headerlink" href="#adding-a-legend" title="Link to this heading">#</a></h4>
+<p>When multiple data sets are displayed on the same axes, a <strong>legend</strong> identifies which plotted data correspond to each data set.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">legend</span></code> function lists the data sets in the order they were plotted.</p>
+<p>The completed comparison can be formatted using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_1</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_1</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ko&#39;</span><span class="p">)</span>
+<span class="nb">hold</span><span class="w"> </span><span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_2</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_2</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;bsquare&#39;</span><span class="p">)</span>
+<span class="nb">hold</span><span class="w"> </span><span class="n">off</span>
+
+<span class="nb">title</span><span class="p">(</span><span class="s">&#39;Voltage vs Acceleration for Two Tests&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Acceleration (m/s^2)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Voltage (V)&#39;</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;Test 1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Test 2&#39;</span><span class="p">)</span>
+<span class="nb">grid</span><span class="w"> </span><span class="n">on</span>
+</pre></div>
+</div>
+<p>The legend allows the reader to distinguish between the two sets of experimental data.</p>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../../_images/plot5.png"><img alt="Formatted voltage versus acceleration plot comparing two sensor tests with a legend." src="../../_images/plot5.png" style="width: 75%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Formatted comparison of two sensor tests.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="multiple-plots-in-one-figure">
+<h3>Multiple Plots in One Figure<a class="headerlink" href="#multiple-plots-in-one-figure" title="Link to this heading">#</a></h3>
+<p>Sometimes related plots are easier to compare when they are displayed separately within the same figure. The <code class="docutils literal notranslate"><span class="pre">subplot</span></code> function divides a figure into a grid of plotting areas called <strong>axes</strong>.</p>
+<p>The syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">subplot</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="w"> </span><span class="n">columns</span><span class="p">,</span><span class="w"> </span><span class="n">position</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first two inputs define the arrangement of the plots, and the third input identifies which position should be active.</p>
+<div class="plot-example" markdown="1">
+<div class="plot-example-text" markdown="1">
+<p>For example, the following code creates two plots arranged vertically:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_1</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_1</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ko&#39;</span><span class="p">)</span>
+
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_2</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_2</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;bsquare&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">subplot(2,</span> <span class="pre">1,</span> <span class="pre">1)</span></code> selects the first position in a grid with two rows and one column. The next <code class="docutils literal notranslate"><span class="pre">plot</span></code> command creates the plot in that position.</p>
+<p><code class="docutils literal notranslate"><span class="pre">subplot(2,</span> <span class="pre">1,</span> <span class="pre">2)</span></code> then selects the second position for the next plot.</p>
+</div>
+<div class="plot-example-image" markdown="1">
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../../_images/plot6.png"><img alt="Two voltage versus acceleration plots arranged vertically in one MATLAB figure." src="../../_images/plot6.png" style="width: 100%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Two plots arranged vertically using <code class="docutils literal notranslate"><span class="pre">subplot</span></code>.</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<section id="formatting-multiple-plots">
+<h4>Formatting Multiple Plots<a class="headerlink" href="#formatting-multiple-plots" title="Link to this heading">#</a></h4>
+<p>Each plot can be formatted independently after its <code class="docutils literal notranslate"><span class="pre">subplot</span></code> command. The <code class="docutils literal notranslate"><span class="pre">sgtitle</span></code> function adds a title that applies to the entire figure.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_1</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_1</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;o&#39;</span><span class="p">)</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&#39;Voltage vs Acceleration for Test 1&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Acceleration (m/s^2)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Voltage (V)&#39;</span><span class="p">)</span>
+<span class="nb">grid</span><span class="w"> </span><span class="n">on</span>
+
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">acceleration_2</span><span class="p">,</span><span class="w"> </span><span class="n">voltage_2</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;o&#39;</span><span class="p">)</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&#39;Voltage vs Acceleration for Test 2&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Acceleration (m/s^2)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Voltage (V)&#39;</span><span class="p">)</span>
+<span class="nb">grid</span><span class="w"> </span><span class="n">on</span>
+
+<span class="nb">sgtitle</span><span class="p">(</span><span class="s">&#39;Relationship between Voltage and G-force Acceleration&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">title</span></code>, <code class="docutils literal notranslate"><span class="pre">xlabel</span></code>, <code class="docutils literal notranslate"><span class="pre">ylabel</span></code>, and <code class="docutils literal notranslate"><span class="pre">grid</span></code> command applies to the currently active subplot. <code class="docutils literal notranslate"><span class="pre">sgtitle</span></code> provides a descriptive title for the complete figure.</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../../_images/plot7.png"><img alt="Two formatted sensor voltage plots with individual titles and an overall figure title." src="../../_images/plot7.png" style="width: 75%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Formatted subplots with an overall figure title.</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="plotting-checklist">
+<h3>Plotting Checklist<a class="headerlink" href="#plotting-checklist" title="Link to this heading">#</a></h3>
+<p>Before considering a technical plot complete, check each of the following:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Check</p></th>
+<th class="head"><p>Requirement</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Variables</strong></p></td>
+<td><p>The independent variable is plotted on the x-axis and the dependent variable is plotted on the y-axis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Plot Style</strong></p></td>
+<td><p>The plot style is appropriate for the data. Use <strong>markers</strong> for individual experimental measurements and <strong>lines</strong> when the data represent a continuous relationship.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Title</strong></p></td>
+<td><p>The plot has a descriptive title that communicates what is being shown.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Axis Labels</strong></p></td>
+<td><p>Both axes are labeled with the variable and units, when applicable.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Legend</strong></p></td>
+<td><p>A legend is included when multiple data sets are plotted on the same axes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Data Sets</strong></p></td>
+<td><p>Different data sets are visually distinguishable when plotted together (using color and marker/line style).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Grid</strong></p></td>
+<td><p>Grid lines are included.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Subplots</strong></p></td>
+<td><p>When subplots are used, each plot is clearly labeled and the complete figure has an appropriate overall title.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Part_02_MATLAB_Skills/M2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_preclass_overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5.1. </span>Pre-Class Assignments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tasks/pre_1/instructions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5.1.2. </span>PCA: Array Operations in MATLAB</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arrays-in-matlab">Arrays in MATLAB</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-vectors">Creating Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-assignment">Direct Assignment</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-evenly-spaced-vectors">Creating Evenly Spaced Vectors</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transposing-vectors">Transposing Vectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-matrices">Creating Matrices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-arrays-with-built-in-functions">Creating Arrays with Built-In Functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-arrays">Working with Arrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-array-size">Determining Array Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#array-indexing">Array Indexing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copying-elements">Copying Elements</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#replacing-elements">Replacing Elements</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-shortcuts">Indexing Shortcuts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-colon-operator">Using the Colon Operator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-end">Using <code class="docutils literal notranslate"><span class="pre">end</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-indexing">Linear Indexing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#concatenating-arrays">Concatenating Arrays</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#horizontal-concatenation">Horizontal Concatenation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-concatenation">Vertical Concatenation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics">Summary Statistics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-statistics-and-matrices">Summary Statistics and Matrices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#element-by-element-operations">Element-by-Element Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#operations-with-scalars-and-arrays">Operations with Scalars and Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-data">Importing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-readmatrix">Using <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-imported-data">Working with Imported Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-nan-values">Handling <code class="docutils literal notranslate"><span class="pre">NaN</span></code> Values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-data">Plotting Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-x-y-plot">Creating an x-y Plot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-a-plot-style">Selecting a Plot Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-a-plot-for-technical-presentation">Formatting a Plot for Technical Presentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-multiple-data-sets">Plotting Multiple Data Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-legend">Adding a Legend</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-plots-in-one-figure">Multiple Plots in One Figure</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formatting-multiple-plots">Formatting Multiple Plots</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-checklist">Plotting Checklist</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="/fall-2026/Appendices/contributors.html">Contributors</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 All rights reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
