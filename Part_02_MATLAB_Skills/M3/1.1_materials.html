@@ -1,0 +1,2014 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.1.1. PCMs: Logic and Modularity &#8212; Purdue University ENGR 13200</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=4bfcbd37" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Part_02_MATLAB_Skills/M3/1.1_materials';</script>
+    <link rel="icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6.1.2. PCA: Name" href="tasks/pre_1/instructions.html" />
+    <link rel="prev" title="6.1. Pre-Class Assignments" href="1_preclass_overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Purdue University ENGR 13200 - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Purdue University ENGR 13200 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to ENGR 13200
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Welcome to ENGR 132</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/course_schedule.html">Course Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/meet_the_team.html">Meet Your Instructional Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/help_sessions.html">Help Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/course_software.html">Course Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/programming_standards.html">Programming Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/academic_integrity.html">Academic Integrity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glue_factory.html">Glue Factory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FYE Student Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/ebec_studio.html">FYE-EBEC Undergraduate Coding and Debugging Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/fye_hub.html">FYE Hub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/0_overview.html">1. Course Policies and Assessments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/ind_1/instructions.html">1.1. Course Policies Exploration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/1_exam-overview.html">1.2. Exams in ENGR 132</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/exam_1/instructions.html">1.2.1. Exam 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/exam_2/instructions.html">1.2.2. Exam 2</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/0_overview.html">2. Artificial Intelligence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_1/instructions.html">2.1. AI: AI Assignment 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_2/instructions.html">2.2. AI: AI Assignment 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_3/instructions.html">2.3. AI: AI Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/0_overview.html">3. Teaming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CATME_instructions.html">3.1. CATME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CodeOfCoop_inst.html">3.2. TM: Code of Cooperation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CodeOfCoop_revisit_inst.html">3.3. TM: Code of Cooperation Revisit</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MATLAB Skills</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M1/0_overview.html">4. MATLAB Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M1/1_preclass_overview.html">4.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M1/1.1_materials.html">4.1.1. PCMs: MATLAB Foundations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/pre_1/instructions.html">4.1.2. PCA: Engineering Calculations in MATLAB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M1/2_inclass_overview.html">4.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/ica_1/instructions.html">4.2.1. ICA: MATLAB Onramp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/ica_2/instructions.html">4.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M2/0_overview.html">5. Data Manipulation and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M2/1_preclass_overview.html">5.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M2/1.1_materials.html">5.1.1. PCMs: Data Manipulation and Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/pre_1/instructions.html">5.1.2. PCA: Array Operations in MATLAB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/pre_2/instructions.html">5.1.3. PCA: Importing and Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M2/2_inclass_overview.html">5.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/ica_1/instructions.html">5.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/ica_2/instructions.html">5.2.2. ICA: Team Plan - Data Manipulation and Visualiztion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M2/3_assignment_overview.html">5.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/ind_1/instructions.html">5.3.1. MA: Data Manipulation and Visualization</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="0_overview.html">6. Logic and Modularity</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="1_preclass_overview.html">6.1. Pre-Class Assignments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">6.1.1. PCMs: Logic and Modularity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/pre_1/instructions.html">6.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/pre_2/instructions.html">6.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="2_inclass_overview.html">6.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ica_1/instructions.html">6.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ica_2/instructions.html">6.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="3_assignment_overview.html">6.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ind_1/instructions.html">6.3.1. MA: Logic and Modularity</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M4/0_overview.html">7. Looping Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M4/1_preclass_overview.html">7.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M4/1.1_materials.html">7.1.1. PCMs: Looping Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/pre_1/instructions.html">7.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/pre_2/instructions.html">7.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M4/2_inclass_overview.html">7.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ica_1/instructions.html">7.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ica_2/instructions.html">7.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M4/3_assignment_overview.html">7.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ind_1/instructions.html">7.3.1. MA: Looping Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M4/tasks/ind_2/instructions.html">7.3.2. MA: Complex Loops</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M5/0_overview.html">8. Regression and Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/1_preclass_overview.html">8.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/1.1_materials.html">8.1.1. PCMs: Regression and Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/pre_1/instructions.html">8.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/pre_2/instructions.html">8.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/2_inclass_overview.html">8.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ica_1/instructions.html">8.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ica_2/instructions.html">8.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/3_assignment_overview.html">8.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ind_1/instructions.html">8.3.1. MA: Regression and Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Team Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_03_Team_Project/0_overview.html">9. Team Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_1/0_overview.html">9.1. Milestone 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_1/tasks/ind_1/instructions.html">9.1.1. M1: Milestone 1 - Individual</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_2/0_overview.html">9.2. Milestone 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_2/tasks/team_1/instructions.html">9.2.1. M2: Milestone 2 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_3/0_overview.html">9.3. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_3/tasks/team_1/instructions.html">9.3.1. M3: Milestone 3 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/0_overview.html">9.4. Milestone 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/tasks/ind_1/instructions.html">9.4.1. M4: Milestone 4 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/tasks/team_1/instructions.html">9.4.2. M4: Milestone 4 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_5/0_overview.html">9.5. Milestone 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_5/tasks/team_1/instructions.html">9.5.1. M5: Milestone 5 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/0_overview.html">9.6. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/tasks/ind_1/instructions.html">9.6.1. M6: Milestone 6 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/tasks/team_1/instructions.html">9.6.2. M6: Milestone 6 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_7/0_overview.html">9.7. Milestone 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_7/tasks/team_1/instructions.html">9.7.1. M7: Milestone 7 - Team</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Individual Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_04_Individual_Project/0_overview.html">10. Individual Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Purdue-ENGR-13200/2026-fall/issues/new?title=Issue%20on%20page%20%2FPart_02_MATLAB_Skills/M3/1.1_materials.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PCMs: Logic and Modularity</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-operators">Relational Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-comparing-scalar-values">Example: Comparing Scalar Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-comparing-values-in-arrays">Example: Comparing Values in Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#truth-tables">Truth Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-combining-conditions-with-scalars">Example: Combining Conditions with Scalars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-combining-conditions-with-arrays">Example: Combining Conditions with Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-operations">Order of Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-evaluating-a-logical-expression">Example: Evaluating a Logical Expression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-parentheses">Using Parentheses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#short-circuit-logical-operators">Short-Circuit Logical Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-short-circuit-and">Example: Short-Circuit AND</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structures">Selection Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-selection-structures">Types of Selection Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-end-structure"><code class="docutils literal notranslate"><span class="pre">if-end</span></code> Structure*</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-end-structure"><code class="docutils literal notranslate"><span class="pre">if-else-end</span></code> Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elseif-else-end-structure"><code class="docutils literal notranslate"><span class="pre">if-elseif-else-end</span></code> Structure</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-classifying-flight-speed">Example: Classifying Flight Speed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structures-and-flowcharts">Selection Structures and Flowcharts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-selection-structures">Testing Selection Structures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions">User-Defined Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-vs-functions">Scripts vs. Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-user-defined-function">Defining a User-Defined Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab-vs-python">MATLAB vs. Python</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-calling-a-function">Creating and Calling a Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gamma-radiation-shielding">Example: Gamma Radiation Shielding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-the-function">Calling the Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-function">Testing a Function</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><span class="raw-html"><div class="d-none"></span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\newcommand\blank{~\underline{\hspace{1.2cm}}~}\\% Bold symbols (vectors)
+\newcommand\bs[1]{\mathbf{#1}}\\% Differential
+\newcommand\dd[2][]{\mathrm{d}^{#1}{#2}}  % use as \dd, \dd{x}, or \dd[2]{x}\\% Poor man's siunitx
+\newcommand\unit[1]{\mathrm{#1}}
+\newcommand\num[1]{#1}
+\newcommand\qty[2]{#1~\unit{#2}}\\\newcommand\per{/}
+\newcommand\squared{{}^2}
+\newcommand\cubed{{}^3}
+%
+% Scale
+\newcommand\milli{\unit{m}}
+\newcommand\centi{\unit{c}}
+\newcommand\kilo{\unit{k}}
+\newcommand\mega{\unit{M}}
+%
+% Percent
+\newcommand\percent{\unit{\%}}
+%
+% Angle
+\newcommand\radian{\unit{rad}}
+\newcommand\degree{\unit{{\kern-4mu}^\circ}}
+%
+% Time
+\newcommand\second{\unit{s}}
+\newcommand\s{\second}
+\newcommand\minute{\unit{min}}
+\newcommand\hour{\unit{h}}
+%
+% Distance
+\newcommand\meter{\unit{m}}
+\newcommand\m{\meter}
+\newcommand\inch{\unit{in}}
+\newcommand\foot{\unit{ft}}
+%
+% Force
+\newcommand\newton{\unit{N}}
+\newcommand\kip{\unit{kip}} % kilopound in &quot;freedom&quot; units - edit made by Sri
+%
+% Mass
+\newcommand\gram{\unit{g}}
+\newcommand\g{\gram}
+\newcommand\kilogram{\unit{kg}}
+\newcommand\kg{\kilogram}
+\newcommand\grain{\unit{grain}}
+\newcommand\ounce{\unit{oz}}
+%
+% Temperature
+\newcommand\kelvin{\unit{K}}
+\newcommand\K{\kelvin}
+\newcommand\celsius{\unit{{}^\circ C}}
+\newcommand\C{\celsius}
+\newcommand\fahrenheit{\unit{{}^\circ F}}
+\newcommand\F{\fahrenheit}
+%
+% Area
+\newcommand\sqft{\unit{sq\,\foot}}  % square foot
+%
+% Volume
+\newcommand\liter{\unit{L}}
+\newcommand\gallon{\unit{gal}}
+%
+% Frequency
+\newcommand\hertz{\unit{Hz}}
+\newcommand\rpm{\unit{rpm}}
+%
+% Voltage
+\newcommand\volt{\unit{V}}
+\newcommand\V{\volt}
+\newcommand\millivolt{\milli\volt}
+\newcommand\mV{\milli\volt}
+\newcommand\kilovolt{\kilo\volt}
+\newcommand\kV{\kilo\volt}
+%
+% Current
+\newcommand\ampere{\unit{A}}
+\newcommand\A{\ampere}
+\newcommand\milliampereA{\milli\ampere}
+\newcommand\mA{\milli\ampere}
+\newcommand\kiloampereA{\kilo\ampere}
+\newcommand\kA{\kilo\ampere}
+%
+% Resistance
+\newcommand\ohm{\Omega}
+\newcommand\milliohm{\milli\ohm}
+\newcommand\kiloohm{\kilo\ohm} % correct SI spelling
+\newcommand\kilohm{\kilo\ohm} % &quot;American&quot; spelling used in siunitx
+\newcommand\megaohm{\mega\ohm} % correct SI spelling
+\newcommand\megohm{\mega\ohm} % &quot;American&quot; spelling used in siunitx
+%
+% Capacitance
+\newcommand\farad{\unit{F}}
+\newcommand\F{\farad}
+\newcommand\microfarad{\micro\farad}
+\newcommand\muF{\micro\farad}
+%
+% Inductance
+\newcommand\henry{\unit{H}}
+\newcommand\H{\henry}
+\newcommand\millihenry{\milli\henry}
+\newcommand\mH{\milli\henry}
+%
+% Power
+\newcommand\watt{\unit{W}}
+\newcommand\W{\watt}
+\newcommand\milliwatt{\milli\watt}
+\newcommand\mW{\milli\watt}
+\newcommand\kilowatt{\kilo\watt}
+\newcommand\kW{\kilo\watt}
+%
+% Energy
+\newcommand\joule{\unit{J}}
+\newcommand\J{\joule}
+%
+% Composite units
+%
+% Torque
+\newcommand\ozin{\unit{\ounce}\,\unit{in}}
+\newcommand\newtonmeter{\unit{\newton\,\meter}}
+%
+% Pressure
+\newcommand\psf{\unit{psf}}  % pounds per square foot
+\newcommand\pcf{\unit{pcf}}  % pounds per cubic foot
+\newcommand\pascal{\unit{Pa}}
+\newcommand\Pa{\pascal}
+\newcommand\ksi{\unit{ksi}} % kilopound per square inch
+\newcommand\bar{\unit{bar}}
+\end{aligned}\end{align} \]</div>
+<p><span class="raw-html"></div></span></p>
+<p>Oct 16, 2026 | 2211 words | 22 min read</p>
+<section class="tex2jax_ignore mathjax_ignore" id="pcms-logic-and-modularity">
+<span id="ma-m3-pre-class-mats"></span><h1><span class="section-number">6.1.1. </span>PCMs: Logic and Modularity<a class="headerlink" href="#pcms-logic-and-modularity" title="Link to this heading">#</a></h1>
+<section id="relational-operators">
+<h2>Relational Operators<a class="headerlink" href="#relational-operators" title="Link to this heading">#</a></h2>
+<p>Relational operators compare two values or expressions to determine whether a condition is true or false. These comparisons are commonly used in programming to make decisions based on data.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-relational-operators">
+<caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Relational Operators</span><a class="headerlink" href="#tab-ma-m3-relational-operators" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p>Equal to</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">==</span> <span class="pre">5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">~=</span></code></p></td>
+<td><p>Not equal to</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">~=</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>Greater than</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">&gt;</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>Less than</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">&lt;</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p>Greater than or equal to</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">&gt;=</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p>Less than or equal to</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">&lt;=</span> <span class="pre">3</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In MATLAB, the result of a relational operation is a logical value where <code class="docutils literal notranslate"><span class="pre">1</span></code> represents true and <code class="docutils literal notranslate"><span class="pre">0</span></code> represents false.</p>
+<div class="note admonition">
+<p class="admonition-title">MATLAB vs. Python</p>
+<p>Most relational operators work the same way in MATLAB and Python. However, MATLAB uses <code class="docutils literal notranslate"><span class="pre">~=</span></code> for “not equal to,” while Python uses <code class="docutils literal notranslate"><span class="pre">!=</span></code>.</p>
+</div>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_35axxjfy&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_3hzjvbxo%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Relational Operations in MATLAB"></iframe>
+<section id="example-comparing-scalar-values">
+<h3>Example: Comparing Scalar Values<a class="headerlink" href="#example-comparing-scalar-values" title="Link to this heading">#</a></h3>
+<p>An engineering system has a maximum allowable temperature of 80°C. The following code determines whether a measured temperature exceeds this limit.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">85</span><span class="p">;</span>
+<span class="n">maxTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+
+<span class="n">tempCheck</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxTemp</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tempCheck =
+
+  logical
+
+   1
+</pre></div>
+</div>
+<p>Since the measured temperature is greater than the maximum allowable temperature, MATLAB returns <code class="docutils literal notranslate"><span class="pre">1</span></code> (true).</p>
+</section>
+<section id="example-comparing-values-in-arrays">
+<h3>Example: Comparing Values in Arrays<a class="headerlink" href="#example-comparing-values-in-arrays" title="Link to this heading">#</a></h3>
+<p>Relational operators can also compare corresponding elements in arrays, returning a logical array of the same size. The following example identifies which temperature measurements exceed the maximum allowable temperature of 80°C.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">75</span><span class="p">,</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w"> </span><span class="mi">85</span><span class="p">];</span>
+<span class="n">maxTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+
+<span class="n">tempCheck</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperatures</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxTemp</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tempCheck =
+
+  1×5 logical array
+
+   0   1   0   1   1
+</pre></div>
+</div>
+<p>The second, fourth, and fifth temperatures exceed the maximum allowable temperature. Each of these positions contains a <code class="docutils literal notranslate"><span class="pre">1</span></code> in the resulting logical array.</p>
+</section>
+</section>
+<section id="logical-operators">
+<h2>Logical Operators<a class="headerlink" href="#logical-operators" title="Link to this heading">#</a></h2>
+<p>Logical operators combine or modify conditions to evaluate whether an expression is true or false. While relational operators compare values, logical operators allow multiple conditions to be evaluated together.</p>
+<p>MATLAB uses four primary logical operators: AND, OR, NOT, and XOR (exclusive OR).</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-logical-operators">
+<caption><span class="caption-number">Table 6.2 </span><span class="caption-text">Logical Operators</span><a class="headerlink" href="#tab-ma-m3-logical-operators" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>MATLAB Syntax</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AND (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>)</p></td>
+<td><p>True when both conditions are true</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&amp;</span> <span class="pre">B</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>OR (<code class="docutils literal notranslate"><span class="pre">|</span></code>)</p></td>
+<td><p>True when at least one condition is true</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">|</span> <span class="pre">B</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>NOT (<code class="docutils literal notranslate"><span class="pre">~</span></code>)</p></td>
+<td><p>Reverses the logical value</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~A</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>XOR (<code class="docutils literal notranslate"><span class="pre">xor</span></code>)</p></td>
+<td><p>True only when exactly one condition is true</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xor(A,</span> <span class="pre">B)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Unlike AND, OR, and NOT, <code class="docutils literal notranslate"><span class="pre">XOR</span></code> is a built-in MATLAB function rather than a symbolic operator.</p>
+<div class="note admonition">
+<p class="admonition-title">MATLAB vs. Python</p>
+<p>In Python, logical conditions are commonly combined using <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, and <code class="docutils literal notranslate"><span class="pre">not</span></code>. MATLAB uses <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code>, and <code class="docutils literal notranslate"><span class="pre">~</span></code> for element-wise logical operations.</p>
+</div>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_u06p89d7&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_gwp758db%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Logical Operators in MATLAB"></iframe>
+<section id="truth-tables">
+<h3>Truth Tables<a class="headerlink" href="#truth-tables" title="Link to this heading">#</a></h3>
+<p>A truth table shows the result of a logical operation for every possible combination of input values. The following table summarizes the behavior of the four logical operators.</p>
+<table style="width: 100%; table-layout: fixed; text-align: center;">
+  <thead>
+    <tr>
+      <th colspan="2" style="text-align: center; background-color: #dce6f1;">
+        Inputs
+      </th>
+      <th colspan="4" style="text-align: center; background-color: #e8e8e8;">
+        Logical Operations
+      </th>
+    </tr>
+    <tr>
+      <th style="text-align: center;">A</th>
+      <th style="text-align: center;">B</th>
+      <th style="text-align: center;">A &amp; B</th>
+      <th style="text-align: center;">A | B</th>
+      <th style="text-align: center;">xor(A, B)</th>
+      <th style="text-align: center;">~A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+  </tbody>
+</table>
+<p>Notice that OR returns true when either or both conditions are true, while XOR returns true only when exactly one condition is true.</p>
+</section>
+<section id="example-combining-conditions-with-scalars">
+<h3>Example: Combining Conditions with Scalars<a class="headerlink" href="#example-combining-conditions-with-scalars" title="Link to this heading">#</a></h3>
+<p>An engineering system operates within an acceptable temperature range of 20°C to 80°C. The following code determines whether a measured temperature falls within this range.</p>
+<ul class="simple">
+<li><p>Mathematically, the condition can be expressed as <span class="math notranslate nohighlight">\( 20 \leq T \leq 80 \)</span>.</p></li>
+<li><p>In MATLAB, each comparison must be written separately and combined using the logical AND (<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>) operator.</p></li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
+<span class="n">minTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="n">maxTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+
+<span class="n">withinRange</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">minTemp</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">maxTemp</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>withinRange =
+
+  logical
+
+   1
+</pre></div>
+</div>
+<p>Since the temperature satisfies both conditions, <code class="docutils literal notranslate"><span class="pre">withinRange</span></code> is <code class="docutils literal notranslate"><span class="pre">1</span></code> (true). If the temperature were below 20°C or above 80°C, the result would be <code class="docutils literal notranslate"><span class="pre">0</span></code> (false).</p>
+</section>
+<section id="example-combining-conditions-with-arrays">
+<h3>Example: Combining Conditions with Arrays<a class="headerlink" href="#example-combining-conditions-with-arrays" title="Link to this heading">#</a></h3>
+<p>Logical operators can also evaluate multiple conditions for each element of an array. The following example identifies temperatures that fall outside the acceptable range.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperatures</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="mi">82</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">91</span><span class="p">];</span>
+<span class="n">minTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="n">maxTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+
+<span class="n">outsideRange</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperatures</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">minTemp</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">temperatures</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxTemp</span>
+</pre></div>
+</div>
+<p>produces</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>outsideRange =
+
+  1×5 logical array
+
+   1   0   1   0   1
+</pre></div>
+</div>
+<p>The first, third, and fifth temperatures are outside the acceptable range, so their corresponding positions contain <code class="docutils literal notranslate"><span class="pre">1</span></code> in the logical array. The <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> operators evaluate corresponding elements when used with arrays, allowing multiple conditions to be combined into a single logical array.</p>
+</section>
+</section>
+<section id="order-of-operations">
+<h2>Order of Operations<a class="headerlink" href="#order-of-operations" title="Link to this heading">#</a></h2>
+<p>When an expression contains multiple types of operators, MATLAB follows a specific order of operations to determine which operations are evaluated first. Understanding this order is important when combining arithmetic calculations, relational comparisons, and logical conditions.</p>
+<p>The following table summarizes the order of operations for the operators covered in this module, from highest to lowest precedence.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-operator-precedence">
+<caption><span class="caption-number">Table 6.3 </span><span class="caption-text">Operator Precedence</span><a class="headerlink" href="#tab-ma-m3-operator-precedence" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Priority</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>MATLAB Operators</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Parentheses</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Transpose and exponentiation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'</span></code>, <code class="docutils literal notranslate"><span class="pre">.'</span></code>, <code class="docutils literal notranslate"><span class="pre">^</span></code>, <code class="docutils literal notranslate"><span class="pre">.^</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Logical NOT</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">~</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Multiplication and division</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">.*</span></code>, <code class="docutils literal notranslate"><span class="pre">./</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Addition and subtraction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Relational comparisons</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">~=</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Logical AND</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Logical OR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Note:</strong> This table summarizes the operators most relevant to this module rather than MATLAB’s complete operator precedence rules.</p>
+<section id="example-evaluating-a-logical-expression">
+<h3>Example: Evaluating a Logical Expression<a class="headerlink" href="#example-evaluating-a-logical-expression" title="Link to this heading">#</a></h3>
+<p>Consider a system that monitors temperature and pressure. An alert should be triggered when the temperature exceeds 80°C <strong>or</strong> when the pressure exceeds 150 kPa while the cooling system is inactive. The conditions can be combined into a single logical expression.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">75</span><span class="p">;</span>
+<span class="n">pressure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">165</span><span class="p">;</span>
+<span class="n">coolingActive</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+
+<span class="n">triggerAlert</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">pressure</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="n">coolingActive</span>
+</pre></div>
+</div>
+<p>MATLAB evaluates the expression according to operator precedence:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">~coolingActive</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">1</span></code> because the cooling system is inactive.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">&gt;</span> <span class="pre">80</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pressure</span> <span class="pre">&gt;</span> <span class="pre">150</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&amp;</span> <span class="pre">1</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">|</span> <span class="pre">1</span></code> evaluates to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>triggerAlert =
+
+  logical
+
+   1
+</pre></div>
+</div>
+<p>The alert is triggered because the pressure exceeds the allowable limit while the cooling system is inactive.</p>
+</section>
+<section id="using-parentheses">
+<h3>Using Parentheses<a class="headerlink" href="#using-parentheses" title="Link to this heading">#</a></h3>
+<p>Although MATLAB automatically follows operator precedence, parentheses can make complex logical expressions easier to read and interpret.</p>
+<p>The previous expression can be rewritten as:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">triggerAlert</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">pressure</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">150</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="n">coolingActive</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Both expressions produce the same result. However, the parentheses make it easier to identify which conditions are evaluated together.</p>
+</section>
+<section id="short-circuit-logical-operators">
+<h3>Short-Circuit Logical Operators<a class="headerlink" href="#short-circuit-logical-operators" title="Link to this heading">#</a></h3>
+<p>MATLAB also provides short-circuit logical operators, <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">||</span></code>. Unlike <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code>, which can evaluate arrays element by element, short-circuit operators can only be used with scalar logical conditions.</p>
+<p>Short-circuit operators only evaluate the second condition when it is necessary to determine the result of the logical expression.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-short-circuit-operators">
+<caption><span class="caption-number">Table 6.4 </span><span class="caption-text">Short-Circuit Operators</span><a class="headerlink" href="#tab-ma-m3-short-circuit-operators" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Behavior</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code></p></td>
+<td><p>Short-circuit AND</p></td>
+<td><p>Skips the second condition if the first is false</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">||</span></code></p></td>
+<td><p>Short-circuit OR</p></td>
+<td><p>Skips the second condition if the first is true</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="example-short-circuit-and">
+<h4>Example: Short-Circuit AND<a class="headerlink" href="#example-short-circuit-and" title="Link to this heading">#</a></h4>
+<p>The following code checks whether a temperature measurement is within an acceptable range.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
+<span class="n">minTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="n">maxTemp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+
+<span class="n">withinRange</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">minTemp</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">maxTemp</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">temperature</span> <span class="pre">&gt;=</span> <span class="pre">minTemp</span></code> is false, MATLAB does not evaluate the second condition because both conditions must be true for the entire expression to be true.</p>
+<p>Short-circuit operators are commonly used in selection structures when evaluating multiple scalar conditions. Use <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">|</span></code> for element-wise logical operations with arrays. Use <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> and <code class="docutils literal notranslate"><span class="pre">||</span></code> when short-circuit evaluation is needed for scalar conditions.</p>
+</section>
+</section>
+</section>
+<section id="selection-structures">
+<h2>Selection Structures<a class="headerlink" href="#selection-structures" title="Link to this heading">#</a></h2>
+<p>A selection structure allows a program to execute different commands based on whether a logical condition is true or false. Rather than executing every command sequentially, MATLAB uses selection structures to determine which commands should be executed. As you learned in ENGR 131, Python uses <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">elif</span></code>, and <code class="docutils literal notranslate"><span class="pre">else</span></code> statements to control which commands are executed. MATLAB uses similar selection structures, but with some important differences in syntax.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-selection-syntax">
+<caption><span class="caption-number">Table 6.5 </span><span class="caption-text">Selection Structure Syntax - MATLAB vs Python</span><a class="headerlink" href="#tab-ma-m3-selection-syntax" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Python</p></th>
+<th class="head"><p>MATLAB</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">if</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span></code></p></td>
+<td><p>Evaluates the first condition</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elif</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elseif</span></code></p></td>
+<td><p>Evaluates an additional condition if previous conditions were false</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">else</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">else</span></code></p></td>
+<td><p>Executes when all previous conditions were false</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">:</span></code> and indentation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">end</span></code></p></td>
+<td><p>MATLAB uses <code class="docutils literal notranslate"><span class="pre">end</span></code> to close the selection structure</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_i7hde4q5&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_o0opddwr%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Selection Structures"></iframe>
+<section id="types-of-selection-structures">
+<h3>Types of Selection Structures<a class="headerlink" href="#types-of-selection-structures" title="Link to this heading">#</a></h3>
+<p>MATLAB supports the same general types of selection structures introduced in Python. The following examples compare the syntax of each structure in both languages.</p>
+<section id="if-end-structure">
+<h4><code class="docutils literal notranslate"><span class="pre">if-end</span></code> Structure*<a class="headerlink" href="#if-end-structure" title="Link to this heading">#</a></h4>
+<p>An <code class="docutils literal notranslate"><span class="pre">if-end</span></code> structure executes commands only when its condition is true. If the condition is false, MATLAB skips those commands and continues after <code class="docutils literal notranslate"><span class="pre">end</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-if-comparison">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Python</strong></p></th>
+<th class="head"><p><strong>MATLAB</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">85</span>
+
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: High temperature&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">85</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Warning: High temperature\n&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="if-else-end-structure">
+<h4><code class="docutils literal notranslate"><span class="pre">if-else-end</span></code> Structure<a class="headerlink" href="#if-else-end-structure" title="Link to this heading">#</a></h4>
+<p>An <code class="docutils literal notranslate"><span class="pre">if-else-end</span></code> structure provides two possible paths. Exactly one branch executes based on whether the condition is true or false.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-if-else-comparison">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Python</strong></p></th>
+<th class="head"><p><strong>MATLAB</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">65</span>
+
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: High temperature&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temperature is within range&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Warning: High temperature\n&#39;</span><span class="p">);</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Temperature is within range\n&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="if-elseif-else-end-structure">
+<h4><code class="docutils literal notranslate"><span class="pre">if-elseif-else-end</span></code> Structure<a class="headerlink" href="#if-elseif-else-end-structure" title="Link to this heading">#</a></h4>
+<p>An <code class="docutils literal notranslate"><span class="pre">if-elseif-else-end</span></code> structure allows a program to choose between multiple outcomes. Conditions are evaluated from top to bottom, and only the first branch with a true condition executes. An <code class="docutils literal notranslate"><span class="pre">elseif</span></code> statement must include a condition, while <code class="docutils literal notranslate"><span class="pre">else</span></code> does not. Multiple <code class="docutils literal notranslate"><span class="pre">elseif</span></code> statements can be included, but only one <code class="docutils literal notranslate"><span class="pre">else</span></code> statement can be used.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-if-elseif-else-comparison">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Python</strong></p></th>
+<th class="head"><p><strong>MATLAB</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">27</span>
+
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: High temperature&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">temperature</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temperature is within range&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Warning: Low temperature&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">27</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Warning: High temperature\n&#39;</span><span class="p">);</span>
+<span class="k">elseif</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Temperature is within range\n&#39;</span><span class="p">);</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Warning: Low temperature\n&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-selection-key-differences">
+<caption><span class="caption-number">Table 6.6 </span><span class="caption-text">MATLAB vs. Python: Key Syntax Differences</span><a class="headerlink" href="#tab-ma-m3-selection-key-differences" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Python</p></th>
+<th class="head"><p>MATLAB</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Additional conditions</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elif</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elseif</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>End of a condition</p></td>
+<td><p>Colon (<code class="docutils literal notranslate"><span class="pre">:</span></code>)</p></td>
+<td><p>No colon</p></td>
+</tr>
+<tr class="row-even"><td><p>End of a selection structure</p></td>
+<td><p>Determined by indentation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">end</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Code blocks</p></td>
+<td><p>Indentation required</p></td>
+<td><p>Indentation recommended</p></td>
+</tr>
+<tr class="row-even"><td><p>Logical AND / OR</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">|</span></code> or <code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code>, <code class="docutils literal notranslate"><span class="pre">||</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="example-classifying-flight-speed">
+<h3>Example: Classifying Flight Speed<a class="headerlink" href="#example-classifying-flight-speed" title="Link to this heading">#</a></h3>
+<p>An engineering team is testing airfoils at different flight speeds. The Mach number represents the ratio of an object’s speed to the speed of sound. The team needs to classify each flight speed according to the following criteria:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Mach Number</p></th>
+<th class="head"><p>Classification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Less than 0.8</p></td>
+<td><p>Subsonic</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.8 to 1.3, inclusive</p></td>
+<td><p>Transonic</p></td>
+</tr>
+<tr class="row-even"><td><p>Greater than 1.3</p></td>
+<td><p>Supersonic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following MATLAB code uses a selection structure to determine the classification.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">machNumber</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.1</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="n">machNumber</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.8</span>
+<span class="w">    </span><span class="n">classification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Subsonic&quot;</span><span class="p">;</span>
+<span class="k">elseif</span><span class="w"> </span><span class="n">machNumber</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">1.3</span>
+<span class="w">    </span><span class="n">classification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Transonic&quot;</span><span class="p">;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="n">classification</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Supersonic&quot;</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Flight classification: %s\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">classification</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Running the code produces: <code class="docutils literal notranslate"><span class="pre">Flight</span> <span class="pre">classification:</span> <span class="pre">Transonic</span></code></p>
+<ul class="simple">
+<li><p>MATLAB first evaluates whether <code class="docutils literal notranslate"><span class="pre">machNumber</span> <span class="pre">&lt;</span> <span class="pre">0.8</span></code>. Since this condition is false, MATLAB moves to the <code class="docutils literal notranslate"><span class="pre">elseif</span></code> condition.</p></li>
+<li><p>The second condition, <code class="docutils literal notranslate"><span class="pre">machNumber</span> <span class="pre">&lt;=</span> <span class="pre">1.3</span></code>, is true, so MATLAB assigns <code class="docutils literal notranslate"><span class="pre">&quot;Transonic&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">classification</span></code> and skips the <code class="docutils literal notranslate"><span class="pre">else</span></code> branch.</p></li>
+<li><p>Notice that the second condition does not need to check whether the Mach number is greater than or equal to 0.8. Values below 0.8 have already been handled by the first branch.</p></li>
+</ul>
+</section>
+<section id="selection-structures-and-flowcharts">
+<h3>Selection Structures and Flowcharts<a class="headerlink" href="#selection-structures-and-flowcharts" title="Link to this heading">#</a></h3>
+<p>The flight classification example can also be represented using a flowchart.</p>
+<pre  class="mermaid">
+        flowchart TD
+    A([Start]) --&gt; B[Set Mach number]
+    B --&gt; C{Mach number &lt; 0.8?}
+    C --&gt;|True| D[Classification = Subsonic]
+    C --&gt;|False| E{Mach number &lt;= 1.3?}
+    E --&gt;|True| F[Classification = Transonic]
+    E --&gt;|False| G[Classification = Supersonic]
+    D --&gt; H[/Display classification/]
+    F --&gt; H
+    G --&gt; H
+    H --&gt; I([End])
+    </pre><p>Each decision symbol corresponds to an <code class="docutils literal notranslate"><span class="pre">if</span></code> or <code class="docutils literal notranslate"><span class="pre">elseif</span></code> condition in the MATLAB code. The true and false branches show which commands execute based on the result of each comparison.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_y24vutav&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_1nzmairk%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Basic Flowcharts"></iframe>
+</section>
+<section id="testing-selection-structures">
+<h3>Testing Selection Structures<a class="headerlink" href="#testing-selection-structures" title="Link to this heading">#</a></h3>
+<p>When testing a selection structure, it is important to <strong>verify that each possible branch produces the expected result</strong>. Values at the boundaries between conditions should also be tested to confirm that the relational operators are correct.</p>
+<p>For the flight classification example, consider the following test cases:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test Case</p></th>
+<th class="head"><p>Mach Number</p></th>
+<th class="head"><p>Expected Classification</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0.5</p></td>
+<td><p>Subsonic</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0.8</p></td>
+<td><p>Transonic</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>1.1</p></td>
+<td><p>Transonic</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>1.3</p></td>
+<td><p>Transonic</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>1.8</p></td>
+<td><p>Supersonic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Testing values of exactly 0.8 and 1.3 is especially important because these values define the boundaries between classifications.</p>
+<div class="tip admonition">
+<p class="admonition-title">Best Practice</p>
+<p>Develop test cases that exercise every branch of a selection structure and verify that the actual outputs match the expected results.</p>
+</div>
+</section>
+</section>
+<section id="user-defined-functions">
+<h2>User-Defined Functions<a class="headerlink" href="#user-defined-functions" title="Link to this heading">#</a></h2>
+<p>As you learned in ENGR 131, a <strong>user-defined function (UDF)</strong> is a reusable block of code created to perform a specific task. Functions help organize programs into smaller components, reduce repeated code, and make programs easier to test and maintain.</p>
+<p>MATLAB includes many built-in functions, such as <code class="docutils literal notranslate"><span class="pre">mean()</span></code>, <code class="docutils literal notranslate"><span class="pre">sum()</span></code>, and <code class="docutils literal notranslate"><span class="pre">sqrt()</span></code>. You can also create your own functions to perform calculations or operations specific to an engineering problem.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_27dpz31u&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_b2xppvfc%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="User-Defined Functions"></iframe>
+<section id="scripts-vs-functions">
+<h3>Scripts vs. Functions<a class="headerlink" href="#scripts-vs-functions" title="Link to this heading">#</a></h3>
+<p>Both MATLAB scripts and functions are saved as <code class="docutils literal notranslate"><span class="pre">.m</span></code> files. However, scripts execute commands in the base workspace, while functions use their own workspaces and communicate through <strong>input and output arguments</strong>. Variables created inside a function are not automatically available outside that function.</p>
+</section>
+<section id="defining-a-user-defined-function">
+<h3>Defining a User-Defined Function<a class="headerlink" href="#defining-a-user-defined-function" title="Link to this heading">#</a></h3>
+<p>MATLAB functions begin with a <strong>function definition line</strong> that identifies the function name, input arguments, and output arguments.</p>
+<p>The general syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>output<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">function_name</span><span class="p">(</span>input1, input2<span class="p">)</span>
+<span class="w">    </span><span class="c">% Function commands</span>
+</pre></div>
+</div>
+<p>In MATLAB, the function definition line must follow these rules:</p>
+<ul class="simple">
+<li><p>The first word is <code class="docutils literal notranslate"><span class="pre">function</span></code>.</p></li>
+<li><p>Output arguments appear before the function name, followed by <code class="docutils literal notranslate"><span class="pre">=</span></code>.</p></li>
+<li><p>Input arguments appear in parentheses after the function name.</p></li>
+<li><p>Multiple input arguments are separated by commas.</p></li>
+<li><p>Multiple output arguments are enclosed in square brackets (<code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
+<li><p>The function name must match the <code class="docutils literal notranslate"><span class="pre">.m</span></code> file name (without the <code class="docutils literal notranslate"><span class="pre">.m</span></code> extension).</p></li>
+</ul>
+<section id="matlab-vs-python">
+<h4>MATLAB vs. Python<a class="headerlink" href="#matlab-vs-python" title="Link to this heading">#</a></h4>
+<p>In Python, functions are defined using <code class="docutils literal notranslate"><span class="pre">def</span></code> and return values using the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement. MATLAB uses the <code class="docutils literal notranslate"><span class="pre">function</span></code> keyword and identifies its output variables in the function definition line.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m3-function-comparison">
+<caption><span class="caption-number">Table 6.7 </span><span class="caption-text">Function Definition Comparison</span><a class="headerlink" href="#tab-ma-m3-function-comparison" title="Link to this table">#</a></caption>
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 85.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><th class="stub"><p><strong>Python</strong></p></th>
+<td><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rectangle_properties</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span>
+    <span class="n">perimeter</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">area</span><span class="p">,</span> <span class="n">perimeter</span>
+</pre></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><th class="stub"><p><strong>MATLAB</strong></p></th>
+<td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="nf">[area, perimeter] = rectangle_properties</span><span class="p">(</span>length, width<span class="p">)</span>
+<span class="w">    </span><span class="nb">area</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">width</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">perimeter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nb">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">width</span><span class="p">);</span>
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both functions calculate the area and perimeter of a rectangle. In Python, the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement specifies which values are returned. In MATLAB, the output variables are identified in the function definition line and enclosed in square brackets (<code class="docutils literal notranslate"><span class="pre">[]</span></code>) when multiple outputs are returned.</p>
+<div class="note admonition">
+<p class="admonition-title">MATLAB Function End Statements</p>
+<p>Unlike MATLAB selection structures, which require an <code class="docutils literal notranslate"><span class="pre">end</span></code> statement, standalone functions saved in their own <code class="docutils literal notranslate"><span class="pre">.m</span></code> files do not require one. However, functions defined within scripts require <code class="docutils literal notranslate"><span class="pre">end</span></code> to close the function definition. In ENGR 132, you will create separate function files using the provided function template, so an <code class="docutils literal notranslate"><span class="pre">end</span></code> statement is optional.</p>
+</div>
+</section>
+</section>
+<section id="creating-and-calling-a-function">
+<h3>Creating and Calling a Function<a class="headerlink" href="#creating-and-calling-a-function" title="Link to this heading">#</a></h3>
+<p>In ENGR 132, you will use the provided <a class="reference download internal" download="" href="../../_downloads/ccfdfaae70b969daa284bd7ec22ac212/ENGR132_function_template.m"><code class="xref download docutils literal notranslate"><span class="pre">MATLAB</span> <span class="pre">function</span> <span class="pre">template</span></code></a> to create UDFs. The template includes a function definition line, documentation header, and sections for initialization, calculations, and formatted displays.</p>
+<p>The documentation header identifies the function’s purpose, input and output arguments, and assignment information. Each argument should include a description and its units, when applicable.</p>
+<section id="example-gamma-radiation-shielding">
+<h4>Example: Gamma Radiation Shielding<a class="headerlink" href="#example-gamma-radiation-shielding" title="Link to this heading">#</a></h4>
+<p>A nuclear engineering team is designing metal shields to reduce exposure to gamma radiation. The exposure rate behind a shield can be calculated using:</p>
+<div class="math notranslate nohighlight">
+\[
+D = D_0 e^{-\mu x}
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D\)</span> is the shielded exposure rate (mR/hr).</p></li>
+<li><p><span class="math notranslate nohighlight">\(D_0\)</span> is the unshielded exposure rate (mR/hr).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> is the linear attenuation coefficient (cm<span class="math notranslate nohighlight">\(^{-1}\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(x\)</span> is the shield thickness (cm).</p></li>
+</ul>
+<p>The function <code class="docutils literal notranslate"><span class="pre">gamma_exposure</span></code> uses three input arguments to calculate one output argument.</p>
+<p><strong>File name: <code class="docutils literal notranslate"><span class="pre">gamma_exposure.m</span></code></strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>shieldedExposure<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">gamma_exposure</span><span class="p">(</span>thickness, attenuationCoeff, unshieldedExposure<span class="p">)</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+<span class="c">% ENGR 132</span>
+<span class="c">% Program Description</span>
+<span class="c">%  Calculates the gamma radiation exposure rate behind a metal shield.</span>
+<span class="c">%</span>
+<span class="c">% Assignment Information</span>
+<span class="c">%   Assignment:        #.#.#</span>
+<span class="c">%   Author:            Name, login@purdue.edu</span>
+<span class="c">%   Section/Team ID:   ###-##</span>
+<span class="c">%</span>
+<span class="c">% Function Call</span>
+<span class="c">%  shieldedExposure = gamma_exposure(thickness, attenuationCoeff, unshieldedExposure)</span>
+<span class="c">%</span>
+<span class="c">% Input Arguments</span>
+<span class="c">%  thickness - shield thickness (cm)</span>
+<span class="c">%  attenuationCoeff - linear attenuation coefficient (cm^-1)</span>
+<span class="c">%  unshieldedExposure - unshielded exposure rate (mR/hr)</span>
+<span class="c">%</span>
+<span class="c">% Output Arguments</span>
+<span class="c">%  shieldedExposure - shielded exposure rate (mR/hr)</span>
+<span class="c">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+
+<span class="c">%% ____________________</span>
+<span class="c">%% INITIALIZATION</span>
+
+
+
+<span class="c">%% ____________________</span>
+<span class="c">%% CALCULATIONS</span>
+
+<span class="n">shieldedExposure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">unshieldedExposure</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">attenuationCoeff</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">thickness</span><span class="p">);</span>
+
+
+<span class="c">%% ____________________</span>
+<span class="c">%% FORMATTATED TEXT/FIGURE DISPLAYS</span>
+</pre></div>
+</div>
+<p>Notice that the function:</p>
+<ul class="simple">
+<li><p>Uses the same argument names in the function definition line and calculations.</p></li>
+<li><p>Assigns the calculated result to the output variable <code class="docutils literal notranslate"><span class="pre">shieldedExposure</span></code>.</p></li>
+<li><p>Uses element-wise multiplication (<code class="docutils literal notranslate"><span class="pre">.*</span></code>) to support scalar and compatible array inputs.</p></li>
+<li><p>Does not require initialization or formatted displays for this calculation.</p></li>
+</ul>
+<p>The file must be saved as <code class="docutils literal notranslate"><span class="pre">gamma_exposure.m</span></code> in MATLAB’s current folder or another location on the MATLAB search path.</p>
+</section>
+<section id="calling-the-function">
+<h4>Calling the Function<a class="headerlink" href="#calling-the-function" title="Link to this heading">#</a></h4>
+<p>To execute a UDF, call it from the Command Window, a script, or another function.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">exposure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gamma_exposure</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>MATLAB assigns the values to the input arguments in the order they appear in the function definition line.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input Argument</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">thickness</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code> cm</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">attenuationCoeff</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1.23</span></code> cm<span class="math notranslate nohighlight">\(^{-1}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unshieldedExposure</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span></code> mR/hr</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The function returns approximately <code class="docutils literal notranslate"><span class="pre">5.41</span></code> mR/hr, which is assigned to the variable <code class="docutils literal notranslate"><span class="pre">exposure</span></code>.</p>
+<div class="important admonition">
+<p class="admonition-title">Input and Output Arguments</p>
+<p>The variable names used when calling a function do not need to match the names in the function definition line. However, <strong>the order of the input arguments must match</strong>.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">gamma_exposure(10,</span> <span class="pre">1.23,</span> <span class="pre">0.5)</span></code> produces an incorrect result because the shield thickness and unshielded exposure rate have been reversed.</p>
+</div>
+<p>A function can also be called using variables that have already been assigned values in the Command Window or a script.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% INITIALIZATION</span>
+
+<span class="n">shieldThickness</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w">       </span><span class="c">% Shield thickness (cm)</span>
+<span class="n">leadCoeff</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.23</span><span class="p">;</span><span class="w">            </span><span class="c">% Linear attenuation coefficient (cm^-1)</span>
+<span class="n">initialExposure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">        </span><span class="c">% Unshielded exposure rate (mR/hr)</span>
+
+<span class="c">%% CALCULATIONS</span>
+
+<span class="n">exposure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gamma_exposure</span><span class="p">(</span><span class="n">shieldThickness</span><span class="p">,</span><span class="w"> </span><span class="n">leadCoeff</span><span class="p">,</span><span class="w"> </span><span class="n">initialExposure</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This produces the same result as calling <code class="docutils literal notranslate"><span class="pre">gamma_exposure(0.5,</span> <span class="pre">1.23,</span> <span class="pre">10)</span></code> directly. Notice that the variable names in the function call (<code class="docutils literal notranslate"><span class="pre">shieldThickness</span></code>, <code class="docutils literal notranslate"><span class="pre">leadCoeff</span></code>, and <code class="docutils literal notranslate"><span class="pre">initialExposure</span></code>) are different from the input argument names in the function definition (<code class="docutils literal notranslate"><span class="pre">thickness</span></code>, <code class="docutils literal notranslate"><span class="pre">attenuationCoeff</span></code>, and <code class="docutils literal notranslate"><span class="pre">unshieldedExposure</span></code>).</p>
+<p>MATLAB passes the <strong>values</strong> of these variables into the function in the order specified by the function definition line. The variable names do not need to match, but their order must be correct.</p>
+<p>Similarly, the variable receiving the function’s output does not need to match the output argument name in the function definition line. For example, exposure receives the value of shieldedExposure when the function is called.</p>
+</section>
+</section>
+<section id="testing-a-function">
+<h3>Testing a Function<a class="headerlink" href="#testing-a-function" title="Link to this heading">#</a></h3>
+<p>After creating a UDF, test cases should be used to verify that the function produces the expected results. For the gamma radiation shielding example, consider an unshielded exposure rate of 10 mR/hr and an attenuation coefficient of 1.23 cm<span class="math notranslate nohighlight">\(^{-1}\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Shield Thickness (cm)</p></th>
+<th class="head"><p>Expected Exposure Rate (mR/hr)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.5</p></td>
+<td><p>5.41</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>2.92</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0.85</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>0.02</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Because the function uses element-wise operations, all four test cases can be evaluated with a single function call:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">thicknesses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span>
+<span class="n">exposureRates</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gamma_exposure</span><span class="p">(</span><span class="n">thicknesses</span><span class="p">,</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When run, this code will produce:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>exposureRates =
+
+    5.4066    2.9210    0.8544    0.0213
+</pre></div>
+</div>
+<p>The calculated values match the expected results, confirming that the function performs correctly for these test cases.
+rev</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Part_02_MATLAB_Skills/M3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_preclass_overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6.1. </span>Pre-Class Assignments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tasks/pre_1/instructions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6.1.2. </span>PCA: Name</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-operators">Relational Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-comparing-scalar-values">Example: Comparing Scalar Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-comparing-values-in-arrays">Example: Comparing Values in Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#truth-tables">Truth Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-combining-conditions-with-scalars">Example: Combining Conditions with Scalars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-combining-conditions-with-arrays">Example: Combining Conditions with Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#order-of-operations">Order of Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-evaluating-a-logical-expression">Example: Evaluating a Logical Expression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-parentheses">Using Parentheses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#short-circuit-logical-operators">Short-Circuit Logical Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-short-circuit-and">Example: Short-Circuit AND</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structures">Selection Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-selection-structures">Types of Selection Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-end-structure"><code class="docutils literal notranslate"><span class="pre">if-end</span></code> Structure*</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-end-structure"><code class="docutils literal notranslate"><span class="pre">if-else-end</span></code> Structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elseif-else-end-structure"><code class="docutils literal notranslate"><span class="pre">if-elseif-else-end</span></code> Structure</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-classifying-flight-speed">Example: Classifying Flight Speed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structures-and-flowcharts">Selection Structures and Flowcharts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-selection-structures">Testing Selection Structures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-defined-functions">User-Defined Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-vs-functions">Scripts vs. Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-user-defined-function">Defining a User-Defined Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab-vs-python">MATLAB vs. Python</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-calling-a-function">Creating and Calling a Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gamma-radiation-shielding">Example: Gamma Radiation Shielding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-the-function">Calling the Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-a-function">Testing a Function</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="/fall-2026/Appendices/contributors.html">Contributors</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 All rights reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
