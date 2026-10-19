@@ -1,0 +1,103 @@
+Traceback (most recent call last):
+  File "/workspaces/13200_content/.venv/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspaces/13200_content/.venv/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/workspaces/13200_content/.venv/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/workspaces/13200_content/.venv/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/vscode/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/asyncio/base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/workspaces/13200_content/.venv/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/workspaces/13200_content/.venv/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/workspaces/13200_content/.venv/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from myst_nb import glue
+import pathlib
+
+def normalize_extension(ext: str) -> str:
+  """Normalize deliverable extensions from frontmatter.
+
+  Accept shorthand values like "m" and normalize to a dot-prefixed extension.
+  """
+  ext = ext.strip().lower()
+  if not ext:
+    raise ValueError("Deliverable extension cannot be empty")
+  if not ext.startswith("."):
+    ext = f".{ext}"
+  return ext
+
+def build_deliverable_filename(label: str, ext: str) -> str:
+  """Build a deliverable filename using username-first convention."""
+  return f"username_{label}{normalize_extension(ext)}"
+
+# GLUE FACTORY: Auto-generated variables
+# DO NOT EDIT THIS CELL MANUALLY
+#
+# Instructor front-matter template in assignment markdown files:
+#
+# ---
+# deliverables:
+#   - report_pdf
+#   - appendix_pdf
+#   - analysis_py
+#   - data_xlsx
+# ---
+#
+# Also supported:
+# deliverables:
+#   - key: report_pdf
+#   - label: analysis
+#     ext: py
+#   - label: script
+#     ext: m      # equivalent to .m
+#
+# Filename convention:
+#   username_<label><extension>
+
+# 4_1_2
+glue('4_1_2_m', build_deliverable_filename('4_1_2', 'm'), display=False)
+
+# 5_1_2
+glue('5_1_2_m', build_deliverable_filename('5_1_2', 'm'), display=False)
+
+# 5_1_3
+glue('5_1_3_m', build_deliverable_filename('5_1_3', 'm'), display=False)
+glue('5_1_3_png', build_deliverable_filename('5_1_3', 'png'), display=False)
+
+# 5_3_1
+glue('5_3_1_m`, build_deliverable_filename('5_3_1', 'm'), display=False)
+glue('5_3_1_report_pdf', build_deliverable_filename('report_5_3_1', 'pdf'), display=False)
+------------------
+
+
+  [36mCell[39m[36m [39m[32mIn[1][39m[32m, line 55[39m
+[31m    [39m[31mglue('5_3_1_m`, build_deliverable_filename('5_3_1', 'm'), display=False)[39m
+                                                          ^
+[31mSyntaxError[39m[31m:[39m unterminated string literal (detected at line 55)
+
+
