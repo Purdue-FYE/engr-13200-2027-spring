@@ -1,0 +1,1491 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7.1.1. PCMs: Looping Structures &#8212; Purdue University ENGR 13200</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=4bfcbd37" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=a8e58a58"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Part_02_MATLAB_Skills/M4/1.1_materials';</script>
+    <link rel="icon" href="../../_static/avatar.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7.1.2. PCA: While Loops" href="tasks/pre_1/instructions.html" />
+    <link rel="prev" title="7.1. Pre-Class Assignments" href="1_preclass_overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Purdue University ENGR 13200 - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Purdue University ENGR 13200 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Welcome to ENGR 13200
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Welcome to ENGR 132</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/course_schedule.html">Course Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/meet_the_team.html">Meet Your Instructional Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/course_software.html">Course Software</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/programming_standards.html">Programming Standards</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/academic_integrity.html">Academic Integrity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../glue_factory.html">Glue Factory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FYE Student Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/help_sessions.html">Help Sessions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/ebec_studio.html">FYE-EBEC Undergraduate Coding and Debugging Studio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Part_00_Course_Resources/fye_hub.html">FYE Hub</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Essentials and Exams</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/0_overview.html">1. Course Policies and Assessments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/ind_1/instructions.html">1.1. Course Policies Exploration</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/1_exam-overview.html">1.2. Exams in ENGR 132</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/exam_1/instructions.html">1.2.1. Exam 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_01_ENGR_Skills/M1_Orientation/tasks/exam_2/instructions.html">1.2.2. Exam 2</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering Practices</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/0_overview.html">2. Artificial Intelligence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_1/instructions.html">2.1. AI: AI Assignment 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_2/instructions.html">2.2. AI: AI Assignment 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M2_AI/tasks/ind_3/instructions.html">2.3. AI: AI Assignment 3</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/0_overview.html">3. Teaming</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CATME_instructions.html">3.1. CATME</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CodeOfCoop_inst.html">3.2. TM: Code of Cooperation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Part_01_ENGR_Skills/M3_Teaming/CodeOfCoop_revisit_inst.html">3.3. TM: Code of Cooperation Revisit</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MATLAB Skills</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M1/0_overview.html">4. MATLAB Foundations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M1/1_preclass_overview.html">4.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M1/1.1_materials.html">4.1.1. PCMs: MATLAB Foundations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/pre_1/instructions.html">4.1.2. PCA: Engineering Calculations in MATLAB</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M1/2_inclass_overview.html">4.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/ica_1/instructions.html">4.2.1. ICA: MATLAB Onramp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M1/tasks/ica_2/instructions.html">4.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M2/0_overview.html">5. Data Manipulation and Visualization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M2/1_preclass_overview.html">5.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M2/1.1_materials.html">5.1.1. PCMs: Data Manipulation and Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/pre_1/instructions.html">5.1.2. PCA: Array Operations in MATLAB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/pre_2/instructions.html">5.1.3. PCA: Importing and Visualizing Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M2/2_inclass_overview.html">5.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/ica_1/instructions.html">5.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/ica_2/instructions.html">5.2.2. ICA: Team Plan - Data Manipulation and Visualiztion</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M2/3_assignment_overview.html">5.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M2/tasks/ind_1/instructions.html">5.3.1. MA: Data Manipulation and Visualization</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M3/0_overview.html">6. Logic and Modularity</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M3/1_preclass_overview.html">6.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M3/1.1_materials.html">6.1.1. PCMs: Logic and Modularity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/pre_1/instructions.html">6.1.2. PCA: Logic and Selection Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/pre_2/instructions.html">6.1.3. PCA: User-Defined Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M3/2_inclass_overview.html">6.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/ica_1/instructions.html">6.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/ica_2/instructions.html">6.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M3/3_assignment_overview.html">6.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M3/tasks/ind_1/instructions.html">6.3.1. MA: Logic and Modularity</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="0_overview.html">7. Looping Structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="1_preclass_overview.html">7.1. Pre-Class Assignments</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">7.1.1. PCMs: Looping Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/pre_1/instructions.html">7.1.2. PCA: While Loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/pre_2/instructions.html">7.1.3. PCA: For Loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/pre_3/instructions.html">7.1.4. PCA: Nested Structures</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="2_inclass_overview.html">7.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ica_1/instructions.html">7.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ica_2/instructions.html">7.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="3_assignment_overview.html">7.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ind_1/instructions.html">7.3.1. MA: Looping Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tasks/ind_2/instructions.html">7.3.2. MA: Nested Structures</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../M5/0_overview.html">8. Regression and Analysis</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/1_preclass_overview.html">8.1. Pre-Class Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/1.1_materials.html">8.1.1. PCMs: Regression and Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/pre_1/instructions.html">8.1.2. PCA: Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/pre_2/instructions.html">8.1.3. PCA: Name</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/2_inclass_overview.html">8.2. In-Class Activities</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ica_1/instructions.html">8.2.1. ICA: Title</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ica_2/instructions.html">8.2.2. ICA: Title</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../M5/3_assignment_overview.html">8.3. Assignments</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../M5/tasks/ind_1/instructions.html">8.3.1. MA: Regression and Analysis</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Team Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Part_03_Team_Project/0_overview.html">9. Team Project</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_1/0_overview.html">9.1. Milestone 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_1/tasks/ind_1/instructions.html">9.1.1. M1: Milestone 1 - Individual</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_2/0_overview.html">9.2. Milestone 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_2/tasks/team_1/instructions.html">9.2.1. M2: Milestone 2 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_3/0_overview.html">9.3. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_3/tasks/team_1/instructions.html">9.3.1. M3: Milestone 3 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/0_overview.html">9.4. Milestone 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/tasks/ind_1/instructions.html">9.4.1. M4: Milestone 4 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_4/tasks/team_1/instructions.html">9.4.2. M4: Milestone 4 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_5/0_overview.html">9.5. Milestone 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_5/tasks/team_1/instructions.html">9.5.1. M5: Milestone 5 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/0_overview.html">9.6. Milestone 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/tasks/ind_1/instructions.html">9.6.1. M6: Milestone 6 - Individual</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_6/tasks/team_1/instructions.html">9.6.2. M6: Milestone 6 - Team</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Part_03_Team_Project/milestone_7/0_overview.html">9.7. Milestone 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Part_03_Team_Project/milestone_7/tasks/team_1/instructions.html">9.7.1. M7: Milestone 7 - Team</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Individual Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Part_04_Individual_Project/0_overview.html">10. Individual Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/Purdue-ENGR-13200/2026-fall/issues/new?title=Issue%20on%20page%20%2FPart_02_MATLAB_Skills/M4/1.1_materials.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PCMs: Looping Structures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-looping-structures">Introduction to Looping Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-vs-repetition-in-flowcharts">Selection vs. Repetition in Flowcharts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops">While Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop-syntax">While Loop Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-tracking-iterations">Example: Tracking Iterations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-repeating-until-a-target-is-reached">Example: Repeating until a Target is Reached</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infinite-loops">Infinite Loops</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-syntax">For Loop Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-a-control-vector">Example: Using a Control Vector</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-totals-and-iteration-tracking">Running Totals and Iteration Tracking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-structures">Nested Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-loops">Nested Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nested-for-loops">Example: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> Loops</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-while-loop-inside-a-for-loop">Example: <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop Inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-for-loop-inside-a-while-loop">Example: <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop Inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nested-while-loops">Example: Nested <code class="docutils literal notranslate"><span class="pre">while</span></code> Loops</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structures-inside-loops">Selection Structures Inside Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-if-statement-inside-a-for-loop">Example: <code class="docutils literal notranslate"><span class="pre">if</span></code> Statement Inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-if-statement-inside-a-while-loop">Example: <code class="docutils literal notranslate"><span class="pre">if</span></code> Statement Inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracing-and-testing-nested-structures">Tracing and Testing Nested Structures</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><span class="raw-html"><div class="d-none"></span></p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\newcommand\blank{~\underline{\hspace{1.2cm}}~}\\% Bold symbols (vectors)
+\newcommand\bs[1]{\mathbf{#1}}\\% Differential
+\newcommand\dd[2][]{\mathrm{d}^{#1}{#2}}  % use as \dd, \dd{x}, or \dd[2]{x}\\% Poor man's siunitx
+\newcommand\unit[1]{\mathrm{#1}}
+\newcommand\num[1]{#1}
+\newcommand\qty[2]{#1~\unit{#2}}\\\newcommand\per{/}
+\newcommand\squared{{}^2}
+\newcommand\cubed{{}^3}
+%
+% Scale
+\newcommand\milli{\unit{m}}
+\newcommand\centi{\unit{c}}
+\newcommand\kilo{\unit{k}}
+\newcommand\mega{\unit{M}}
+%
+% Percent
+\newcommand\percent{\unit{\%}}
+%
+% Angle
+\newcommand\radian{\unit{rad}}
+\newcommand\degree{\unit{{\kern-4mu}^\circ}}
+%
+% Time
+\newcommand\second{\unit{s}}
+\newcommand\s{\second}
+\newcommand\minute{\unit{min}}
+\newcommand\hour{\unit{h}}
+%
+% Distance
+\newcommand\meter{\unit{m}}
+\newcommand\m{\meter}
+\newcommand\inch{\unit{in}}
+\newcommand\foot{\unit{ft}}
+%
+% Force
+\newcommand\newton{\unit{N}}
+\newcommand\kip{\unit{kip}} % kilopound in &quot;freedom&quot; units - edit made by Sri
+%
+% Mass
+\newcommand\gram{\unit{g}}
+\newcommand\g{\gram}
+\newcommand\kilogram{\unit{kg}}
+\newcommand\kg{\kilogram}
+\newcommand\grain{\unit{grain}}
+\newcommand\ounce{\unit{oz}}
+%
+% Temperature
+\newcommand\kelvin{\unit{K}}
+\newcommand\K{\kelvin}
+\newcommand\celsius{\unit{{}^\circ C}}
+\newcommand\C{\celsius}
+\newcommand\fahrenheit{\unit{{}^\circ F}}
+\newcommand\F{\fahrenheit}
+%
+% Area
+\newcommand\sqft{\unit{sq\,\foot}}  % square foot
+%
+% Volume
+\newcommand\liter{\unit{L}}
+\newcommand\gallon{\unit{gal}}
+%
+% Frequency
+\newcommand\hertz{\unit{Hz}}
+\newcommand\rpm{\unit{rpm}}
+%
+% Voltage
+\newcommand\volt{\unit{V}}
+\newcommand\V{\volt}
+\newcommand\millivolt{\milli\volt}
+\newcommand\mV{\milli\volt}
+\newcommand\kilovolt{\kilo\volt}
+\newcommand\kV{\kilo\volt}
+%
+% Current
+\newcommand\ampere{\unit{A}}
+\newcommand\A{\ampere}
+\newcommand\milliampereA{\milli\ampere}
+\newcommand\mA{\milli\ampere}
+\newcommand\kiloampereA{\kilo\ampere}
+\newcommand\kA{\kilo\ampere}
+%
+% Resistance
+\newcommand\ohm{\Omega}
+\newcommand\milliohm{\milli\ohm}
+\newcommand\kiloohm{\kilo\ohm} % correct SI spelling
+\newcommand\kilohm{\kilo\ohm} % &quot;American&quot; spelling used in siunitx
+\newcommand\megaohm{\mega\ohm} % correct SI spelling
+\newcommand\megohm{\mega\ohm} % &quot;American&quot; spelling used in siunitx
+%
+% Capacitance
+\newcommand\farad{\unit{F}}
+\newcommand\F{\farad}
+\newcommand\microfarad{\micro\farad}
+\newcommand\muF{\micro\farad}
+%
+% Inductance
+\newcommand\henry{\unit{H}}
+\newcommand\H{\henry}
+\newcommand\millihenry{\milli\henry}
+\newcommand\mH{\milli\henry}
+%
+% Power
+\newcommand\watt{\unit{W}}
+\newcommand\W{\watt}
+\newcommand\milliwatt{\milli\watt}
+\newcommand\mW{\milli\watt}
+\newcommand\kilowatt{\kilo\watt}
+\newcommand\kW{\kilo\watt}
+%
+% Energy
+\newcommand\joule{\unit{J}}
+\newcommand\J{\joule}
+%
+% Composite units
+%
+% Torque
+\newcommand\ozin{\unit{\ounce}\,\unit{in}}
+\newcommand\newtonmeter{\unit{\newton\,\meter}}
+%
+% Pressure
+\newcommand\psf{\unit{psf}}  % pounds per square foot
+\newcommand\pcf{\unit{pcf}}  % pounds per cubic foot
+\newcommand\pascal{\unit{Pa}}
+\newcommand\Pa{\pascal}
+\newcommand\ksi{\unit{ksi}} % kilopound per square inch
+\newcommand\bar{\unit{bar}}
+\end{aligned}\end{align} \]</div>
+<p><span class="raw-html"></div></span></p>
+<p>Oct 28, 2026 | 1624 words | 16 min read</p>
+<section class="tex2jax_ignore mathjax_ignore" id="pcms-looping-structures">
+<span id="ma-m4-pre-class-mats"></span><h1><span class="section-number">7.1.1. </span>PCMs: Looping Structures<a class="headerlink" href="#pcms-looping-structures" title="Link to this heading">#</a></h1>
+<p>Looping structures allow a program to repeat commands without writing those commands multiple times. In ENGR 131, you used loops in Python. This module builds on that experience by introducing MATLAB’s <code class="docutils literal notranslate"><span class="pre">while</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span></code> syntax and showing how loops interact with selection structures and other loops.</p>
+<section id="introduction-to-looping-structures">
+<h2>Introduction to Looping Structures<a class="headerlink" href="#introduction-to-looping-structures" title="Link to this heading">#</a></h2>
+<p>A repetition structure, or loop, repeats a block of commands. One complete execution of that block is called an iteration (or pass). Unlike a selection structure, which chooses a path and continues forward, a loop returns to its controlling decision to determine whether another iteration should occur.</p>
+<p>MATLAB supports two common loop structures:</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-loop-types">
+<caption><span class="caption-number">Table 7.1 </span><span class="caption-text">Types of Loops in MATLAB</span><a class="headerlink" href="#tab-ma-m4-loop-types" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Loop</p></th>
+<th class="head"><p>Also Called</p></th>
+<th class="head"><p>How Repetition Is Controlled</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></td>
+<td><p>Indefinite loop</p></td>
+<td><p>Continues while a logical condition remains true; the number of iterations may not be known in advance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">for</span></code></p></td>
+<td><p>Definite loop</p></td>
+<td><p>Iterates through a specified sequence of values; the number of iterations is determined by that sequence.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_j6pb6ck1&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_i27uyfjw%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Loop Basics"></iframe>
+<section id="selection-vs-repetition-in-flowcharts">
+<h3>Selection vs. Repetition in Flowcharts<a class="headerlink" href="#selection-vs-repetition-in-flowcharts" title="Link to this heading">#</a></h3>
+<p>Both selection and repetition structures use decision diamonds. In a selection structure, a decision determines which path is followed. In a repetition structure, a path returns to the decision, allowing the commands to execute again. When tracing a loop, pay attention to where control returns and when the exit condition is reached.</p>
+</section>
+</section>
+<section id="while-loops">
+<h2>While Loops<a class="headerlink" href="#while-loops" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">while</span></code> loop evaluates a logical condition <strong>before</strong> each iteration. If the condition is true, MATLAB executes the commands inside the loop. If it is false, MATLAB skips the loop or exits it and continues with the next command.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_87fctgh5&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_90hsbdp3%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="While Loops in MATLAB"></iframe>
+<section id="while-loop-syntax">
+<h3>While Loop Syntax<a class="headerlink" href="#while-loop-syntax" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="n">logical_condition</span>
+<span class="w">    </span><span class="c">% commands to repeat</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>A typical while loop has three important parts:</p>
+<ol class="arabic simple">
+<li><p><strong>Initialization:</strong> Assign a starting value to the variable used in the condition before entering the loop.</p></li>
+<li><p><strong>Condition:</strong> Define when the loop should continue.</p></li>
+<li><p><strong>Update:</strong> Change a relevant value during the loop so the condition can eventually become false.</p></li>
+</ol>
+<section id="example-tracking-iterations">
+<h4>Example: Tracking Iterations<a class="headerlink" href="#example-tracking-iterations" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-while-counter-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">counter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Iteration %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">counter</span><span class="p">);</span>
+<span class="w">    </span><span class="n">counter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Iteration 1
+Iteration 2
+Iteration 3
+Iteration 4
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The condition is checked at the beginning of each pass. After the fourth iteration, <code class="docutils literal notranslate"><span class="pre">counter</span></code> becomes 5, so <code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">&lt;=</span> <span class="pre">4</span></code> is false and the loop ends. If the condition were false before the first iteration, the loop body would never execute.</p>
+</section>
+<section id="example-repeating-until-a-target-is-reached">
+<h4>Example: Repeating until a Target is Reached<a class="headerlink" href="#example-repeating-until-a-target-is-reached" title="Link to this heading">#</a></h4>
+<p>A <code class="docutils literal notranslate"><span class="pre">while</span></code> loop can also stop based on a calculated value rather than a fixed iteration count.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-while-loop-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="n">iterations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">iterations</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">iterations</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Final value: %.0f\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Iterations: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">iterations</span><span class="p">);</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Final value: 24
+Iterations: 3
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Here, the number of iterations depends on how many times the value must double to reach or exceed the target. The following table tracks how <code class="docutils literal notranslate"><span class="pre">value</span></code> changes during each iteration of the loop.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-while-tracking" style="width: 60%">
+<caption><span class="caption-number">Table 7.2 </span><span class="caption-text">While Loop Tracking Table</span><a class="headerlink" href="#tab-ma-m4-while-tracking" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Iteration</p></th>
+<th class="head text-center"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0 (Initial)</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>6</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>12</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>24</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>At the beginning of each iteration, MATLAB checks whether <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">&lt;</span> <span class="pre">20</span></code>. Since the condition is true for values of <code class="docutils literal notranslate"><span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span></code>, and <code class="docutils literal notranslate"><span class="pre">12</span></code>, the loop continues. After the third iteration, <code class="docutils literal notranslate"><span class="pre">value</span></code> becomes <code class="docutils literal notranslate"><span class="pre">24</span></code>. The condition is then false, so the loop terminates.</p>
+<p>The final value is <code class="docutils literal notranslate"><span class="pre">24</span></code>, and the loop executes <strong>3 iterations</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">MATLAB vs. Python</p>
+<p>Python uses a colon and indentation to define a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop body. MATLAB does not use a colon after the condition and requires an <code class="docutils literal notranslate"><span class="pre">end</span></code> statement to close the loop. Indentation is still recommended for readability, but not required to run.</p>
+</div>
+</section>
+</section>
+<section id="infinite-loops">
+<h3>Infinite Loops<a class="headerlink" href="#infinite-loops" title="Link to this heading">#</a></h3>
+<p>If a <code class="docutils literal notranslate"><span class="pre">while</span></code> condition never becomes false, the loop can continue indefinitely. Initialize the variables used in the condition, update them appropriately inside the loop, and test whether the loop terminates for different starting values.</p>
+</section>
+</section>
+<section id="for-loops">
+<h2>For Loops<a class="headerlink" href="#for-loops" title="Link to this heading">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop repeats commands for each value in a specified sequence. In MATLAB, the loop variable receives one value from the sequence during each iteration.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_ticgzaxm&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_5sqzepcf%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="For Loops"></iframe>
+<section id="for-loop-syntax">
+<h3>For Loop Syntax<a class="headerlink" href="#for-loop-syntax" title="Link to this heading">#</a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">loopVariable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">controlVector</span>
+<span class="w">    </span><span class="c">% Commands to repeat</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>A <strong>control vector</strong> supplies the values used by the loop variable. A common way to define these values is with the colon operator.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-for-loop-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;k = %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>k = 1
+k = 2
+k = 3
+k = 4
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The colon notation <code class="docutils literal notranslate"><span class="pre">start:step:stop</span></code> allows a different increment:</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-for-loop-colon">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">11</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;%d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2
+5
+8
+1
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If the step is omitted, MATLAB uses a step of 1.</p>
+<section id="example-using-a-control-vector">
+<h4>Example: Using a Control Vector<a class="headerlink" href="#example-using-a-control-vector" title="Link to this heading">#</a></h4>
+<p>The values in the control vector do not have to be consecutive integers.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-control-vector-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">measurement</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">measurement</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Measurement: %d, Result: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">measurement</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Measurement: 4, Result: 13
+Measurement: -1, Result: 3
+Measurement: 0, Result: 5
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="running-totals-and-iteration-tracking">
+<h3>Running Totals and Iteration Tracking<a class="headerlink" href="#running-totals-and-iteration-tracking" title="Link to this heading">#</a></h3>
+<p>A <strong>running total</strong> is a variable that keeps track of a result as a loop repeats. Initialize the variable before the loop, then update it during each iteration.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-running-total-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span>
+<span class="w">    </span><span class="n">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Total: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">);</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Total: 10
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-for-tracking" style="width: 50%">
+<caption><span class="caption-number">Table 7.3 </span><span class="caption-text">For Loop Tracking Table</span><a class="headerlink" href="#tab-ma-m4-for-tracking" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Iteration</p></th>
+<th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">k</span></code></p></th>
+<th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">total</span></code> After Update</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>6</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A tracking table helps verify that a loop updates variables in the expected order. Remember that MATLAB does not automatically save the intermediate value of every calculation; if you want to retain results from each iteration, you must store them.</p>
+<div class="note admonition">
+<p class="admonition-title">MATLAB vs. Python</p>
+<p>In Python, a definite loop often uses <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">range(1,</span> <span class="pre">5):</span></code>. In MATLAB, the equivalent sequence is commonly written <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">=</span> <span class="pre">1:4</span></code>, followed by an <code class="docutils literal notranslate"><span class="pre">end</span></code> statement. Unlike Python’s <code class="docutils literal notranslate"><span class="pre">range</span></code>, MATLAB’s colon sequence includes the stop value when that value is reached by the step.</p>
+</div>
+</section>
+</section>
+<section id="nested-structures">
+<h2>Nested Structures<a class="headerlink" href="#nested-structures" title="Link to this heading">#</a></h2>
+<p>A <strong>nested structure</strong> is a programming structure placed inside another structure. In MATLAB, loops and selection structures can be combined to perform more complex tasks.</p>
+<p>For example, a program might need to repeat a calculation several times, check a condition during each repetition, or perform one loop inside another.</p>
+<p>Nested structures can include:</p>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop inside another <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">while</span></code> loop inside another <code class="docutils literal notranslate"><span class="pre">while</span></code> loop.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop, or vice versa.</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">if</span></code> statement inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> or <code class="docutils literal notranslate"><span class="pre">while</span></code> loop.</p></li>
+</ul>
+<p>When one loop is placed inside another, it is called a <strong>nested loop</strong>. The loop containing the other loop is the <strong>outer loop</strong>, and the loop inside it is the <strong>inner loop</strong>.</p>
+<section id="nested-loops">
+<h3>Nested Loops<a class="headerlink" href="#nested-loops" title="Link to this heading">#</a></h3>
+<p>In a nested loop, the inner loop executes during each iteration of the outer loop. The inner loop must finish before the outer loop continues to its next iteration.</p>
+<p>MATLAB supports four combinations of nested <code class="docutils literal notranslate"><span class="pre">for</span></code> and <code class="docutils literal notranslate"><span class="pre">while</span></code> loops.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-nested-combinations">
+<caption><span class="caption-number">Table 7.4 </span><span class="caption-text">Nested Loop Combinations</span><a class="headerlink" href="#tab-ma-m4-nested-combinations" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Outer Loop</p></th>
+<th class="head"><p>Inner Loop</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">for</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span></code></p></td>
+<td><p>The inner <code class="docutils literal notranslate"><span class="pre">for</span></code> loop completes for each outer iteration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">for</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></td>
+<td><p>The inner <code class="docutils literal notranslate"><span class="pre">while</span></code> loop repeats until its condition becomes false.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span></code></p></td>
+<td><p>The inner <code class="docutils literal notranslate"><span class="pre">for</span></code> loop completes each time the outer <code class="docutils literal notranslate"><span class="pre">while</span></code> condition is true.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">while</span></code></p></td>
+<td><p>Both loops repeat based on their own logical conditions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Regardless of the combination, the same general execution order applies:</p>
+<ol class="arabic simple">
+<li><p>The outer loop begins an iteration.</p></li>
+<li><p>The inner loop executes until it finishes.</p></li>
+<li><p>MATLAB continues with any remaining commands in the outer loop.</p></li>
+<li><p>The outer loop begins its next iteration if another iteration is required.</p></li>
+</ol>
+<section id="example-nested-for-loops">
+<h4>Example: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> Loops<a class="headerlink" href="#example-nested-for-loops" title="Link to this heading">#</a></h4>
+<p>The following example uses two <code class="docutils literal notranslate"><span class="pre">for</span></code> loops to display combinations of values.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-nested-for-loop-output">
+<colgroup>
+<col style="width: 60.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;outer = %d, inner = %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outer</span><span class="p">,</span><span class="w"> </span><span class="n">inner</span><span class="p">);</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>outer = 1, inner = 1
+outer = 1, inner = 2
+outer = 1, inner = 3
+outer = 2, inner = 1
+outer = 2, inner = 2
+outer = 2, inner = 3
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">outer</span> <span class="pre">=</span> <span class="pre">1</span></code>, the inner loop executes three times using the values <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code>, and <code class="docutils literal notranslate"><span class="pre">3</span></code>. After the inner loop finishes, the outer loop advances to <code class="docutils literal notranslate"><span class="pre">outer</span> <span class="pre">=</span> <span class="pre">2</span></code>, and the inner loop executes three more times.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-nested-tracking" style="width: 50%">
+<caption><span class="caption-number">Table 7.5 </span><span class="caption-text">Nested For Loops Tracking Table</span><a class="headerlink" href="#tab-ma-m4-nested-tracking" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Execution of Inner Body</p></th>
+<th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">outer</span></code></p></th>
+<th class="head text-center"><p><code class="docutils literal notranslate"><span class="pre">inner</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>6</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The outer loop has two iterations. During each one, the inner loop runs three times, producing six executions of <code class="docutils literal notranslate"><span class="pre">fprintf</span></code> in total.</p>
+</section>
+<section id="example-while-loop-inside-a-for-loop">
+<h4>Example: <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop Inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop<a class="headerlink" href="#example-while-loop-inside-a-for-loop" title="Link to this heading">#</a></h4>
+<p>A <code class="docutils literal notranslate"><span class="pre">while</span></code> loop can also be placed inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. This is useful when a calculation must repeat until a condition is met for each value in a control vector.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-for-while-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">target</span>
+<span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Target: %d, Final: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Target: 5, Final: 8
+Target: 10, Final: 16
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The outer <code class="docutils literal notranslate"><span class="pre">for</span></code> loop provides two target values: <code class="docutils literal notranslate"><span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">10</span></code>. For each target, <code class="docutils literal notranslate"><span class="pre">value</span></code> is initialized to <code class="docutils literal notranslate"><span class="pre">1</span></code>. The inner <code class="docutils literal notranslate"><span class="pre">while</span></code> loop doubles <code class="docutils literal notranslate"><span class="pre">value</span></code> until it is no longer less than the current target.</p>
+<p>Notice that <strong><code class="docutils literal notranslate"><span class="pre">value</span></code> is initialized inside the outer loop but before the inner loop</strong>. This ensures that the calculation starts at <code class="docutils literal notranslate"><span class="pre">1</span></code> for each target.</p>
+</section>
+<section id="example-for-loop-inside-a-while-loop">
+<h4>Example: <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop Inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop<a class="headerlink" href="#example-for-loop-inside-a-while-loop" title="Link to this heading">#</a></h4>
+<p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop can execute inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop. In this case, the inner <code class="docutils literal notranslate"><span class="pre">for</span></code> loop completes all its iterations each time the outer <code class="docutils literal notranslate"><span class="pre">while</span></code> loop repeats.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-while-for-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">round</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="nb">round</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Round %d: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">round</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">);</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="nb">round</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">round</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Round 1: 1
+Round 1: 2
+Round 1: 3
+Round 2: 1
+Round 2: 2
+Round 2: 3
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The outer <code class="docutils literal notranslate"><span class="pre">while</span></code> loop repeats while <code class="docutils literal notranslate"><span class="pre">round</span> <span class="pre">&lt;=</span> <span class="pre">2</span></code>. During each outer iteration, the inner <code class="docutils literal notranslate"><span class="pre">for</span></code> loop executes three times. After the inner loop finishes, <code class="docutils literal notranslate"><span class="pre">round</span></code> increases by <code class="docutils literal notranslate"><span class="pre">1</span></code>. The inner <code class="docutils literal notranslate"><span class="pre">for</span></code> loop executes 6 times in total across the two outer iterations.</p>
+</section>
+<section id="example-nested-while-loops">
+<h4>Example: Nested <code class="docutils literal notranslate"><span class="pre">while</span></code> Loops<a class="headerlink" href="#example-nested-while-loops" title="Link to this heading">#</a></h4>
+<p>Two <code class="docutils literal notranslate"><span class="pre">while</span></code> loops can also be nested. Each loop has its own logical condition and control variable.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-while-while-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">outer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="n">inner</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;outer = %d, inner = %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outer</span><span class="p">,</span><span class="w"> </span><span class="n">inner</span><span class="p">);</span>
+<span class="w">        </span><span class="n">inner</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="n">outer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>outer = 1, inner = 1
+outer = 1, inner = 2
+outer = 1, inner = 3
+outer = 2, inner = 1
+outer = 2, inner = 2
+outer = 2, inner = 3
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This example produces the same output as the nested <code class="docutils literal notranslate"><span class="pre">for</span></code> loop example, but repetition is controlled by logical conditions instead of control vectors.</p>
+<p>Pay attention to the placement of the variable updates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">inner</span></code> is initialized to <code class="docutils literal notranslate"><span class="pre">1</span></code> each time the outer loop begins an iteration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">inner</span></code> increases during each iteration of the inner loop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">outer</span></code> increases after the inner loop finishes.</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">inner</span></code> were initialized before the outer loop instead, it would not reset to <code class="docutils literal notranslate"><span class="pre">1</span></code> during the second outer iteration. If either control variable were not updated correctly, its corresponding <code class="docutils literal notranslate"><span class="pre">while</span></code> loop might never terminate.</p>
+</section>
+</section>
+<section id="selection-structures-inside-loops">
+<h3>Selection Structures Inside Loops<a class="headerlink" href="#selection-structures-inside-loops" title="Link to this heading">#</a></h3>
+<p>Loops can also contain selection structures. This allows a program to make decisions during each iteration.</p>
+<p>Unlike a nested loop, an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement does not repeat commands by itself. Instead, it determines whether specific commands should execute during the current iteration.</p>
+<section id="example-if-statement-inside-a-for-loop">
+<h4>Example: <code class="docutils literal notranslate"><span class="pre">if</span></code> Statement Inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop<a class="headerlink" href="#example-if-statement-inside-a-for-loop" title="Link to this heading">#</a></h4>
+<p>The following example checks whether each number in a control vector is positive, negative, or zero.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-for-if-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;%d is positive\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">);</span>
+<span class="w">    </span><span class="k">elseif</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;%d is negative\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;%d is zero\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">);</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4 is positive
+-2 is negative
+0 is zero
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>During each iteration, the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop assigns a new value to <code class="docutils literal notranslate"><span class="pre">number</span></code>. MATLAB then evaluates the selection structure and executes the appropriate branch.</p>
+<p>The selection structure is evaluated three times, once for each value in the control vector.</p>
+</section>
+<section id="example-if-statement-inside-a-while-loop">
+<h4>Example: <code class="docutils literal notranslate"><span class="pre">if</span></code> Statement Inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop<a class="headerlink" href="#example-if-statement-inside-a-while-loop" title="Link to this heading">#</a></h4>
+<p>Selection structures can also be placed inside <code class="docutils literal notranslate"><span class="pre">while</span></code> loops.</p>
+<div class="pst-scrollable-table-container"><table class="table" id="tab-ma-m4-while-if-output">
+<colgroup>
+<col style="width: 70.0%" />
+<col style="width: 30.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>MATLAB Code</strong></p></th>
+<th class="head"><p><strong>Produces</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Value exceeds 10: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</td>
+<td><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Value exceeds 10: 16
+Value exceeds 10: 32
+</pre></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">while</span></code> loop repeatedly doubles <code class="docutils literal notranslate"><span class="pre">value</span></code> until it reaches or exceeds <code class="docutils literal notranslate"><span class="pre">20</span></code>. During each iteration, the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement checks whether the updated value is greater than <code class="docutils literal notranslate"><span class="pre">10</span></code>. The <code class="docutils literal notranslate"><span class="pre">fprintf</span></code> statement executes only when the condition is true.</p>
+<p>Notice that the final value is <code class="docutils literal notranslate"><span class="pre">32</span></code>, even though the loop condition is <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">&lt;</span> <span class="pre">20</span></code>. This occurs because the condition is checked <strong>before</strong> each iteration, not immediately after <code class="docutils literal notranslate"><span class="pre">value</span></code> is updated.</p>
+</section>
+</section>
+<section id="tracing-and-testing-nested-structures">
+<h3>Tracing and Testing Nested Structures<a class="headerlink" href="#tracing-and-testing-nested-structures" title="Link to this heading">#</a></h3>
+<p>Nested structures can be more difficult to follow because multiple conditions and variables may control the execution of commands.</p>
+<p>When tracing nested structures:</p>
+<ol class="arabic simple">
+<li><p>Identify the outer and inner structures.</p></li>
+<li><p>Determine the initial values of all control variables.</p></li>
+<li><p>Follow the commands in the order MATLAB executes them.</p></li>
+<li><p>Track how variables change during each iteration.</p></li>
+<li><p>Identify when each loop finishes and when the outer loop continues.</p></li>
+</ol>
+<p>For nested <code class="docutils literal notranslate"><span class="pre">while</span></code> loops, verify that each loop has a condition that can eventually become false.</p>
+<p>For loops containing selection structures, test values that cause each possible branch to execute.</p>
+<p>When debugging nested structures, a tracking table can help identify incorrect variable updates, unexpected iteration counts, or loops that do not terminate.</p>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_p7e34ct4&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_i53r4gef%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Complex Loops Tutorial 1 - Matrix Indexing"></iframe>
+<iframe id="kaltura_player" src='https://cdnapisec.kaltura.com/p/983291/embedPlaykitJs/uiconf_id/56090002?iframeembed=true&amp;entry_id=1_wcxvnyy1&amp;config%5Bprovider%5D=%7B%22widgetId%22%3A%221_41k7hk2v%22%7D&amp;config%5Bplayback%5D=%7B%22startTime%22%3A0%7D'  style="width: 608px;height: 402px;border: 0;" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-downloads allow-forms allow-same-origin allow-scripts allow-top-navigation allow-pointer-lock allow-popups allow-modals allow-orientation-lock allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation" title="Complex Loops Tutorial 2 - Matrix Indexing"></iframe></section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Part_02_MATLAB_Skills/M4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_preclass_overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">7.1. </span>Pre-Class Assignments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tasks/pre_1/instructions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7.1.2. </span>PCA: While Loops</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-looping-structures">Introduction to Looping Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-vs-repetition-in-flowcharts">Selection vs. Repetition in Flowcharts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops">While Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loop-syntax">While Loop Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-tracking-iterations">Example: Tracking Iterations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-repeating-until-a-target-is-reached">Example: Repeating until a Target is Reached</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#infinite-loops">Infinite Loops</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-syntax">For Loop Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-a-control-vector">Example: Using a Control Vector</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-totals-and-iteration-tracking">Running Totals and Iteration Tracking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-structures">Nested Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-loops">Nested Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nested-for-loops">Example: Nested <code class="docutils literal notranslate"><span class="pre">for</span></code> Loops</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-while-loop-inside-a-for-loop">Example: <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop Inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-for-loop-inside-a-while-loop">Example: <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop Inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nested-while-loops">Example: Nested <code class="docutils literal notranslate"><span class="pre">while</span></code> Loops</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-structures-inside-loops">Selection Structures Inside Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-if-statement-inside-a-for-loop">Example: <code class="docutils literal notranslate"><span class="pre">if</span></code> Statement Inside a <code class="docutils literal notranslate"><span class="pre">for</span></code> Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-if-statement-inside-a-while-loop">Example: <code class="docutils literal notranslate"><span class="pre">if</span></code> Statement Inside a <code class="docutils literal notranslate"><span class="pre">while</span></code> Loop</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracing-and-testing-nested-structures">Tracing and Testing Nested Structures</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="/fall-2026/Appendices/contributors.html">Contributors</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 All rights reserved..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
